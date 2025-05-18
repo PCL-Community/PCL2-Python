@@ -1,0 +1,8 @@
+idea/
+.vs/
+venv/
+__pycache__/
+*.pyc
+Plain_Craft_Launcher_2/.minecraft/
+Plain_Craft_Launcher_2/logs/
+Plain_Craft_Launcher_2/Modules/Minecraft/logs
