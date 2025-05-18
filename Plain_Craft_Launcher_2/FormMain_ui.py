@@ -1,9 +1,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from Modules.Base.ModSetup import ModSetup as Setup
 
-
 class Ui_FormMain(object):
-    def setupUi(self, FormMain):
+    def setupUi(self, FormMain: QtWidgets.QWidget):
         FormMain.setObjectName("FormMain")
         FormMain.resize(900, 550)
         FormMain.setBaseSize(QtCore.QSize(900, 550))
@@ -27,7 +26,8 @@ class Ui_FormMain(object):
         self.retranslateUi(FormMain)
         QtCore.QMetaObject.connectSlotsByName(FormMain)
 
-    def retranslateUi(self, FormMain):
+    def retranslateUi(self, FormMain: QtWidgets.QWidget):
         _translate = QtCore.QCoreApplication.translate
         FormMain.setWindowTitle(_translate("FormMain", "Plain Craft Launcher 2"))
+
 from Resources import *

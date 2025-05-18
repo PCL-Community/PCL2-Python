@@ -1,6 +1,6 @@
 import json
-from ModLogging import ModLogging, LoggingType as LT
-
+from typing import Any
+from .ModLogging import ModLogging, LoggingType as LT
 
 class ModSetup:
     """写入/读取设置相关的类"""
@@ -16,7 +16,7 @@ class ModSetup:
 
         self.logger.write("设置初始化完成", LT.INFO)
 
-    def load_settings(self, file_path="."):
+    def load_settings(self, file_path:str="./data/Config.json"):
         """读取已经存储的设置"""
         try:
             with open(file_path, "r") as f:
@@ -29,7 +29,7 @@ class ModSetup:
             self.logger.write("设置文件未找到，进行初始化", LT.INFO)
             self.setup_settings()           
 
-    def save_settings(self, file_path="."):
+    def save_settings(self, file_path:str="./data/Config.json"):
         """保存设置"""
         settings = self.__dict__
         with open(file_path, "w") as f:
@@ -37,11 +37,11 @@ class ModSetup:
 
         self.logger.write("设置文件保存成功", LT.INFO)
 
-    def get_settings(self, setting):
+    def get_settings(self, setting: str):
         """获取设置"""
         return getattr(self, setting, None)
-
-    def set_settings(self, setting, value):
+    
+    def set_settings(self, setting: str, value: Any) -> None:
         """设置设置"""
         setattr(self, setting, value)
         self.save_settings()

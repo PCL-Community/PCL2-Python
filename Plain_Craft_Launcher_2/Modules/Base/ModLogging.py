@@ -8,6 +8,18 @@ launcher_data_folder = './data'
 def now() -> str:
     return datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
+class LoggingType(Enum):
+    INFO = 'Info'
+    WARN = 'Warn'
+    ERROR = 'Error'
+    FATAL = 'Fatal'
+    
+    def __str__(self) -> str:
+        return self.value
+    
+    def __repr__(self) -> str:
+        return self.value
+
 class ModLogging():
     def __init__(
         self,
@@ -42,7 +54,7 @@ class ModLogging():
     def write(
         self, 
         message:str, 
-        log_level:str
+        log_level:LoggingType
     ) -> None:
         r'''
         Writing A Log Into File
@@ -63,16 +75,16 @@ class ModLogging():
                 'Error': ' ',
                 'Fatal': ' '
             }
-            log_level = str(log_level)
+            log_level_str = str(log_level)
             with open(f'{launcher_data_folder}/Log1.log', 'a', encoding='utf-8') as f:
-                f.write(f'[{log_level}]{space_map[log_level]}[{self.module_name}] {now()} > {message}\n')
+                f.write(f'[{log_level_str}]{space_map[log_level_str]}[{self.module_name}] {now()} > {message}\n')
             color_map = {
                 'Info': green,
                 'Warn': yellow,
                 'Error': red,
                 'Fatal': red
             }
-            print(f'{color_map[log_level]}[{log_level}]{clear}{space_map[log_level]}[{self.module_name}] {now()} > {message}')
+            print(f'{color_map[log_level_str]}[{log_level_str}]{clear}{space_map[log_level_str]}[{self.module_name}] {now()} > {message}')
         except Exception as ex:
             time = now()
             print(f'[{red}FATAL{clear}] [Logging] {time} > 记录日志时发生错误')
@@ -83,17 +95,7 @@ class ModLogging():
                 fatal.write(f'[FATAL] 错误类型：{type(ex).__name__}\n')
                 fatal.write(f'[FATAL] 错误堆栈信息：\n{str(getTraceBack())}\n')
 
-class LoggingType(Enum):
-    INFO = 'Info'
-    WARN = 'Warn'
-    ERROR = 'Error'
-    FATAL = 'Fatal'
-    
-    def __str__(self) -> str:
-        return self.value
-    
-    def __repr__(self) -> str:
-        return self.value
+
 
 # Console Color Code, using f-string to insert, like {red}[Error]{clear}Exception
 clear = '\033[0m'  

@@ -1,18 +1,22 @@
-from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
-from PyQt5.QtGui import *
+# from PyQt5.QtWidgets import *
+# from PyQt5.QtCore import *
+# from PyQt5.QtGui import *
+
+from PyQt5.QtWidgets import QWidget
+from PyQt5.QtCore import Qt, QRectF
+from PyQt5.QtGui import QPainter, QPainterPath, QBrush, QColor, QPaintEvent
 
 class RoundShadow(QWidget):
     """圆角边框类"""
 
-    def __init__(self, parent=None):
-        super(RoundShadow, self).__init__(parent)
+    def __init__(self):
+        super().__init__()
         self.border_width = 8
         # 设置 窗口无边框和背景透明 *必须
         self.setAttribute(Qt.WA_TranslucentBackground)
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.Window)
 
-    def paintEvent(self, event):
+    def paintEvent(self, a0: QPaintEvent):
         # 阴影
         path = QPainterPath()
         path.setFillRule(Qt.WindingFill)
