@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\Python\\MCL\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Python\\MCL\\Plain_Craft_Launcher_2\\Modules\\Base\\ModSetup.py||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Plain_Craft_Launcher_2\\Modules\\Base\\ModSetup.py||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Python\\MCL\\Plain_Craft_Launcher_2\\FormMain.py||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Plain_Craft_Launcher_2\\FormMain.py||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ModSetup.py",
+              "DocumentMoniker": "E:\\Python\\MCL\\Plain_Craft_Launcher_2\\Modules\\Base\\ModSetup.py",
+              "RelativeDocumentMoniker": "Plain_Craft_Launcher_2\\Modules\\Base\\ModSetup.py",
+              "ToolTip": "E:\\Python\\MCL\\Plain_Craft_Launcher_2\\Modules\\Base\\ModSetup.py",
+              "RelativeToolTip": "Plain_Craft_Launcher_2\\Modules\\Base\\ModSetup.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAASXSURBVDhPdZRrbBRVFMf/c\u002Bexr3Zl\u002BxbahW2ikaDykBioiWAxghgfMYCJX0QTQ0MEoh8wChGCUqNoUkWtoBgeEonRoBFI\u002BIRflNKIvANiFwqhS0vbZaH7mJl7517PzC4iHzzZ2Xtnds/v/u85/zv4v3jkynsvtWS\u002BTDde6r4x4e\u002BuxZXHQXyYX9z0ambp3srt7VBKaZXpv7Hs6pv7vFhkwQm7hl0QpmYIAZNzmK7YHZWxjiXjf5sXZ/Lrb4Zr68b0QqQ/td2upAYRADdmO\u002B6vF/Kn6jBaL6JK\u002B7aQwqAywKQkWBloSYFZ8YHCtOhwbNA18cP1BOZHbz61pWX7gYBUiQD4yVCHwxWzBvPAsQsO/tITEGDQCKZzD7XyJh6oGkYCDiJK4vebMYxxHU2ZzM6Drx9ZRYicz/EjAG4e6pDXPVPrP5dF31eHkCNw6boN7khYDAgxBtcV4LaE6yiUNAvC9VDKluCO8ccI8avP8UP7/NryqpLE2Ihn4dzZHEa2HsSiha\u002BhuT6FkZEMfjnwHdLpPjTWNGPJ8y8jPq4OO/bswuHeHvA8h1i944y8d94sLGkgGaB9AU1FqaNE14iw4LkSbdPnou/iaUyckMI7q7tgGRHs39uDZEsr\u002BvovIDkhCeUpiCKVZHzNFGty9bB\u002BuPiCDzTSbni6pUkUCJjlBmKugqYU4AG2bcMu2Xh8zrPoJ9Ary5ei6AjfHfBsD1JI6DrVutoIG/X6Hv148TnmKdXoq8uIMMmlVQlIA9oebkcmM4A161fh\u002BPGjSCRqYYWiaKirR\u002BvEFDipA9W2wcphbuQk1KgLcal4jBVg3lNUOkalibnhUShaldyC7m1d\u002BLhrAy6m\u002B3Hq1Gns3rMTRw79gX3f78dDU2cGuzAtDdsSm9AV2Qx5Pp\u002BTUt9qCMkSJfL3zPCNQBl3gReXPQ23KKGoy75ijzq6vnMd3t/UCeFw6j6HYWqQBKW10WCOIB4qbs8uTOaYUFryhmfCUQyD3ITLJRyCugQSXNECEpxGje6dsVIAIysSLDhpQZ4PPTJ7LSmiKnCwOpseXuYRDPEQbPKZD\u002BNkaN93vt/8HikilEcfRJn05Y8lsrIPbI6MzgmAo54RHfJCBAzDP1J0ymCTQkUw7lAn/wurQPyrrJD\u002BSzSPoJ6mZvhAY8AN3WUHdqQ/SRbANr7ViWn3TaGS\u002BlnBB/MXtJchNL8F9u9kRaGntLhS8xq11nMfCCU1XRGMH72M0ZXdcAsCsageFL1crzKgrOq2Sn\u002B\u002B5ec2zG\u002BvRVxT/rVGS536aIVUbJ2Seq3MUQfPDqIKHCsn/YkQKYjQ\u002BhFSECHzmzQP9kIw6hPOKwszplUjWWMSTFKePBa8HJInv0joLP\u002BulEYHFNNbjCK6J/WilgmE6XdGq0uylg/htEWuaejlFtLkjibmoUnzcDeN9bpw7njBJs9smMIQ/lQp1m5R4pMFA4smnZBT49dc6lXYJmieNI6RK3Y6MSRI1WSdYxydN1J9NarE23cAb0XqTOczHq/6zBmYOGQm0o9eaXujlM8veNDRzRVFhSey0Jt7uMWSzMuOM7F2dvjH7nIm8A\u002BMpYUUmfzh1wAAAABJRU5ErkJggg==",
+              "WhenOpened": "2025-05-18T01:37:32.406Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "FormMain.py",
+              "DocumentMoniker": "E:\\Python\\MCL\\Plain_Craft_Launcher_2\\FormMain.py",
+              "RelativeDocumentMoniker": "Plain_Craft_Launcher_2\\FormMain.py",
+              "ToolTip": "E:\\Python\\MCL\\Plain_Craft_Launcher_2\\FormMain.py",
+              "RelativeToolTip": "Plain_Craft_Launcher_2\\FormMain.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAASXSURBVDhPdZRrbBRVFMf/c\u002Bexr3Zl\u002BxbahW2ikaDykBioiWAxghgfMYCJX0QTQ0MEoh8wChGCUqNoUkWtoBgeEonRoBFI\u002BIRflNKIvANiFwqhS0vbZaH7mJl7517PzC4iHzzZ2Xtnds/v/u85/zv4v3jkynsvtWS\u002BTDde6r4x4e\u002BuxZXHQXyYX9z0ambp3srt7VBKaZXpv7Hs6pv7vFhkwQm7hl0QpmYIAZNzmK7YHZWxjiXjf5sXZ/Lrb4Zr68b0QqQ/td2upAYRADdmO\u002B6vF/Kn6jBaL6JK\u002B7aQwqAywKQkWBloSYFZ8YHCtOhwbNA18cP1BOZHbz61pWX7gYBUiQD4yVCHwxWzBvPAsQsO/tITEGDQCKZzD7XyJh6oGkYCDiJK4vebMYxxHU2ZzM6Drx9ZRYicz/EjAG4e6pDXPVPrP5dF31eHkCNw6boN7khYDAgxBtcV4LaE6yiUNAvC9VDKluCO8ccI8avP8UP7/NryqpLE2Ihn4dzZHEa2HsSiha\u002BhuT6FkZEMfjnwHdLpPjTWNGPJ8y8jPq4OO/bswuHeHvA8h1i944y8d94sLGkgGaB9AU1FqaNE14iw4LkSbdPnou/iaUyckMI7q7tgGRHs39uDZEsr\u002BvovIDkhCeUpiCKVZHzNFGty9bB\u002BuPiCDzTSbni6pUkUCJjlBmKugqYU4AG2bcMu2Xh8zrPoJ9Ary5ei6AjfHfBsD1JI6DrVutoIG/X6Hv148TnmKdXoq8uIMMmlVQlIA9oebkcmM4A161fh\u002BPGjSCRqYYWiaKirR\u002BvEFDipA9W2wcphbuQk1KgLcal4jBVg3lNUOkalibnhUShaldyC7m1d\u002BLhrAy6m\u002B3Hq1Gns3rMTRw79gX3f78dDU2cGuzAtDdsSm9AV2Qx5Pp\u002BTUt9qCMkSJfL3zPCNQBl3gReXPQ23KKGoy75ijzq6vnMd3t/UCeFw6j6HYWqQBKW10WCOIB4qbs8uTOaYUFryhmfCUQyD3ITLJRyCugQSXNECEpxGje6dsVIAIysSLDhpQZ4PPTJ7LSmiKnCwOpseXuYRDPEQbPKZD\u002BNkaN93vt/8HikilEcfRJn05Y8lsrIPbI6MzgmAo54RHfJCBAzDP1J0ymCTQkUw7lAn/wurQPyrrJD\u002BSzSPoJ6mZvhAY8AN3WUHdqQ/SRbANr7ViWn3TaGS\u002BlnBB/MXtJchNL8F9u9kRaGntLhS8xq11nMfCCU1XRGMH72M0ZXdcAsCsageFL1crzKgrOq2Sn\u002B\u002B5ec2zG\u002BvRVxT/rVGS536aIVUbJ2Seq3MUQfPDqIKHCsn/YkQKYjQ\u002BhFSECHzmzQP9kIw6hPOKwszplUjWWMSTFKePBa8HJInv0joLP\u002BulEYHFNNbjCK6J/WilgmE6XdGq0uylg/htEWuaejlFtLkjibmoUnzcDeN9bpw7njBJs9smMIQ/lQp1m5R4pMFA4smnZBT49dc6lXYJmieNI6RK3Y6MSRI1WSdYxydN1J9NarE23cAb0XqTOczHq/6zBmYOGQm0o9eaXujlM8veNDRzRVFhSey0Jt7uMWSzMuOM7F2dvjH7nIm8A\u002BMpYUUmfzh1wAAAABJRU5ErkJggg==",
+              "WhenOpened": "2025-05-18T01:36:47.95Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
