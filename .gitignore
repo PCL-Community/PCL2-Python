@@ -1,8 +1,15 @@
+# Editor Config
 idea/
 .vs/
-venv/
+
+# Python Environment & Cache
+**/*venv*/
 __pycache__/
 *.pyc
+
+# Log
+**/logs/
+Plain_Craft_Launcher_2/data/*.log
+
+# Debugging Files
 Plain_Craft_Launcher_2/.minecraft/
-Plain_Craft_Launcher_2/logs/
-Plain_Craft_Launcher_2/Modules/Minecraft/logs
