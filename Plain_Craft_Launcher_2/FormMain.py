@@ -37,8 +37,3 @@ class FormMain(RoundShadow):
         self.container.setGeometry(9, 9, self.width() - 18, self.height() - 18)
 
 
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    t = FormMain()
-    t.show()
-    app.exec_()
