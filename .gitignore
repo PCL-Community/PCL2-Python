@@ -12,4 +12,4 @@ __pycache__/
 Plain_Craft_Launcher_2/data/*.log
 
 # Debugging Files
-Plain_Craft_Launcher_2/.minecraft/
+**/.minecraft/

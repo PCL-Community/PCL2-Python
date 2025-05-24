@@ -7,11 +7,12 @@ Minecraft 启动模块
 """
 
 import sys
-from .ModMsAuth import MinecraftMicrosoftLogin
+from ModMsAuth import MinecraftMicrosoftLogin
 import minecraft_launcher_lib as mclib
 
-CLIENT_ID = "c14b0370-8d75-42f8-b329-5b60d39e319f"
+from ModSecret import ModSecret
 
+CLIENT_ID = ModSecret().client_id
 
 def launch(options):
     minecraft_dir = input("minecraft_dir: \n> ")
@@ -34,17 +35,9 @@ def launch(options):
 
 
 def main():
-    """主函数，演示登录流程"""
-    print("Minecraft Microsoft 账户登录示例")
-    print("-" * 40)
-
+    """主登录流程"""
     # 初始化登录模块
     mc_login = MinecraftMicrosoftLogin(client_id=CLIENT_ID)
-
-    # 执行登录流程
-    print("开始登录流程...")
-    print("请按照提示在浏览器中完成 Microsoft 账户登录")
-    print("-" * 40)
 
     result = mc_login.login()
 
@@ -62,7 +55,6 @@ def main():
         }
         launch(options)
 
-        print("\n你现在可以使用此令牌启动游戏或执行其他操作")
     else:
         # 登录失败，显示错误信息
         print(f"登录失败: {result['error']}")

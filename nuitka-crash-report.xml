@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='utf8'?>
+<nuitka-compilation-report completion="error exit message (1)" exit_message="pyqt5: Error, it seems 'PyQt5' is not installed or broken." mode="onefile" nuitka_commercial_version="not installed" nuitka_version="2.7.3">
+  <performance>
+    <memory_usage name="after_launch" value="58138624" />
+  </performance>
+  <data_composer blob_size="None" />
+  <command_line>
+    <option value="--standalone" />
+    <option value="--onefile" />
+    <option value="--enable-plugin=pyqt5" />
+    <option value="--include-package=PyQt5" />
+    <option value="--include-package=PyQt5.QtSvg" />
+    <option value="--include-package=PyQt5.QtCore" />
+    <option value="--include-package=PyQt5.QtGui" />
+    <option value="--include-package=PyQt5.QtWidgets" />
+    <option value="--windows-icon-from-ico=e:\Python\MCL\Plain_Craft_Launcher_2\Images\icon.ico" />
+    <option value="--output-dir=dist" />
+    <option value="--windows-console-mode=disable" />
+    <option value="--follow-imports" />
+    <option value="--remove-output" />
+    <option value="--assume-yes-for-downloads" />
+    <option value="--show-progress" />
+    <option value="--show-memory" />
+    <option value="--include-data-dir=e:\Python\MCL\Plain_Craft_Launcher_2\Images=Images" />
+    <option value="--include-module=_ctypes" />
+    <option value="e:\Python\MCL\Plain_Craft_Launcher_2\Application.py" />
+    <option value="--msvc=latest" />
+  </command_line>
+  <plugins>
+    <plugin name="anti-bloat" user_enabled="no" />
+    <plugin name="data-files" user_enabled="no" />
+    <plugin name="delvewheel" user_enabled="no" />
+    <plugin name="dll-files" user_enabled="no" />
+    <plugin name="eventlet" user_enabled="no" />
+    <plugin name="gevent" user_enabled="no" />
+    <plugin name="gi" user_enabled="no" />
+    <plugin name="glfw" user_enabled="no" />
+    <plugin name="implicit-imports" user_enabled="no" />
+    <plugin name="kivy" user_enabled="no" />
+    <plugin name="matplotlib" user_enabled="no" />
+    <plugin name="multiprocessing" user_enabled="no" />
+    <plugin name="options-nanny" user_enabled="no" />
+    <plugin name="pbr-compat" user_enabled="no" />
+    <plugin name="pkg-resources" user_enabled="no" />
+    <plugin name="playwright" user_enabled="no" />
+    <plugin name="pyqt5" user_enabled="yes" />
+    <plugin name="pywebview" user_enabled="no" />
+    <plugin name="spacy" user_enabled="no" />
+    <plugin name="transformers" user_enabled="no" />
+  </plugins>
+  <onefile cache_mode="temporary" unpack_dir="{TEMP}\onefile_{PID}_{TIME}" />
+  <distributions />
+  <python arch_name="x86_64" filesystem_encoding="utf-8" os_name="Windows" os_release="11" python_exe="${sys.prefix}\Scripts\python.exe" python_flavor="CPython Official" python_version="3.7.2">
+    <search_path>
+      <path value="${cwd}" />
+      <path value="${cwd}\Plain_Craft_Launcher_2" />
+      <path value="${sys.real_prefix}\DLLs" />
+      <path value="${sys.real_prefix}\lib" />
+      <path value="${sys.real_prefix}" />
+      <path value="${sys.prefix}" />
+      <path value="${sys.prefix}\lib\site-packages" />
+    </search_path>
+  </python>
+  <output run_filename="failed too early" />
+</nuitka-compilation-report>

@@ -5,6 +5,8 @@ cryptography==44.0.3
 idna==3.10
 minecraft-launcher-lib==7.1
 msal==1.32.3
+Nuitka==2.7.3
+ordered-set==4.1.0
 pycparser==2.22
 PyJWT==2.10.1
 PyQt5==5.15.11
@@ -14,3 +16,4 @@ PyQt5_sip==12.17.0
 PyQt5Designer==5.14.1
 requests==2.32.3
 urllib3==2.4.0
+zstandard==0.23.0

@@ -1,9 +1,15 @@
+# -*- coding: utf-8 -*-
 import datetime
 from enum import Enum
 from traceback import format_exc as getTraceBack
-from os import remove as removeFile
+from os import remove as removeFile, makedirs
+from os.path import exists
 
-launcher_data_folder = './data'
+launcher_data_folder = './logs'
+
+# 确保日志目录存在
+if not exists(launcher_data_folder):
+    makedirs(launcher_data_folder)
 
 def now() -> str:
     return datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -37,6 +43,7 @@ class ModLogging():
         None
         """
         self.module_name = module_name
+
         for i in range(4, 0, -1):
             old_log = f'{launcher_data_folder}/Log{i}.log'
             new_log = f'{launcher_data_folder}/Log{i+1}.log'
@@ -44,7 +51,7 @@ class ModLogging():
                 with open(old_log, 'r', encoding='utf-8') as f1:
                     with open(new_log, 'w', encoding='utf-8') as f2:
                         f2.write(f1.read())
-            except: pass
+            except FileNotFoundError: pass
         open(f'{launcher_data_folder}/Log1.log', 'w', encoding='utf-8').close()
         try: 
             removeFile('crash.log')
