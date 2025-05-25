@@ -13,3 +13,5 @@ Plain_Craft_Launcher_2/data/*.log
 
 # Debugging Files
 **/.minecraft/
+**/dist/*
+nuitka-crash-report.xml

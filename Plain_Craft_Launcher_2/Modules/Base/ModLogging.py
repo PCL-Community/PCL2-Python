@@ -3,9 +3,17 @@ import datetime
 from enum import Enum
 from traceback import format_exc as getTraceBack
 from os import remove as removeFile, makedirs
-from os.path import exists
+from os.path import exists, dirname, abspath, join
+import sys
 
-launcher_data_folder = './logs'
+def get_program_dir():
+    if getattr(sys, 'frozen', False):
+        # Nuitka、PyInstaller 打包后
+        return dirname(sys.executable)
+    else:
+        return dirname(abspath(__file__))
+
+launcher_data_folder = join(get_program_dir(), 'logs')
 
 # 确保日志目录存在
 if not exists(launcher_data_folder):
@@ -101,8 +109,6 @@ class ModLogging():
                 fatal.write(f'[FATAL] [Logging] {time} > 记录日志时发生错误\n')
                 fatal.write(f'[FATAL] 错误类型：{type(ex).__name__}\n')
                 fatal.write(f'[FATAL] 错误堆栈信息：\n{str(getTraceBack())}\n')
-
-
 
 # Console Color Code, using f-string to insert, like {red}[Error]{clear}Exception
 clear = '\033[0m'  
