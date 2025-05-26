@@ -1,6 +1,7 @@
 # Editor Config
-idea/
+.idea/
 .vs/
+.vscode/
 
 # Python Environment & Cache
 **/*venv*/
@@ -15,3 +16,6 @@ Plain_Craft_Launcher_2/data/*.log
 **/.minecraft/
 **/dist/*
 nuitka-crash-report.xml
+
+# macOS FileSystem's Shit
+.DS_Store
