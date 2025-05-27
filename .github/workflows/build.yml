@@ -29,7 +29,7 @@ jobs:
       # 运行你的 Python 脚本
       - name: Start Building Via Nuitka
         run: |
-          python -m nuitka --standalone --onefile --enable-plugin=pyqt5 --include-package=PyQt5 --include-package=PyQt5.QtSvg --include-package=PyQt5.QtCore --include-package=PyQt5.QtGui --include-package=PyQt5.QtWidgets --windows-icon-from-ico=./Plain_Craft_Launcher_2/Images/icon.ico --output-dir=dist --windows-console-mode=disable --follow-imports --remove-output --assume-yes-for-downloads --show-progress --show-memory --include-data-dir=./Plain_Craft_Launcher_2/Images=Images --include-module=_ctypes ./Plain_Craft_Launcher_2/Application.py
+          ./Plain_Craft_Launcher_2/build.cmd
 
       # 配置 Git 推送
       - name: Commit and push changes
