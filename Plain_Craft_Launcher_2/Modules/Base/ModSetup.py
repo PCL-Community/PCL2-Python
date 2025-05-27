@@ -6,6 +6,10 @@ from .ModLogging import ModLogging, LoggingType as LT
 
 class ModSetup:
     """写入/读取设置相关的类"""
+    # 常量（不随主题变化）
+    CORNER_RADIUS = 8
+    SIZE: tuple[int, int] = (850, 500)
+    TITLE_BAR_H: int = 48
 
     def __init__(self):
         self.logger = ModLogging(module_name="ModSetup")
@@ -14,18 +18,16 @@ class ModSetup:
 
     def setup_settings(self):
         """初始化设置项"""
-        self.ColorBrush1 = "#343d4a"
+        self.color_brush_1 = "#343d4a"
         self.color_brush_2 = "#0F6FCD"
-        self.ColorBrush3 = "#1370f3"
-        self.ColorBrush4 = "#4890f5"
+        self.color_brush_3 = "#1370f3"
+        self.color_brush_4 = "#4890f5"
         self.color_brush_5 = "#96c0f9"
-        self.ColorBrush6 = "#d5e6fd"
-        self.ColorBrush7 = "#e0eafd"
-        self.ColorBrush8 = "#eaf2fe"
-        self.ColorBrushBg0 = "#96c0f9"
-        self.ColorBrushBg1 = "#bee0eafd"
-        self.corner_radius = 8
-        self.size = (850, 500)
+        self.color_brush_6 = "#d5e6fd"
+        self.color_brush_7 = "#e0eafd"
+        self.color_brush_8 = "#eaf2fe"
+        self.color_brush_bg_0 = "#96c0f9"
+        self.color_brush_bg_1 = "#bee0eafd"
 
         self.logger.write("设置初始化完成", LT.INFO)
 

@@ -16,9 +16,9 @@ class Ui_FormMain(object):
 
     def setupUi(self, FormMain: QtWidgets.QWidget):
         # 获取所有需要的设置项
-        size = setup.size
+        size = setup.SIZE
 
-        corner_radius = setup.corner_radius
+        corner_radius = setup.CORNER_RADIUS
         bg_color = setup.color_brush_5
         fg_color = setup.color_brush_2
 
@@ -34,8 +34,8 @@ class Ui_FormMain(object):
 
         # 标题栏 Panel
         self.PanTitle = QtWidgets.QFrame(FormMain)
-        self.PanTitle.setGeometry(QtCore.QRect(0, 0, size[0], 48))
-        self.PanTitle.setBaseSize(QtCore.QSize(size[0], 48))
+        self.PanTitle.setGeometry(QtCore.QRect(0, 0, size[0], setup.TITLE_BAR_H))
+        self.PanTitle.setBaseSize(QtCore.QSize(size[0], setup.TITLE_BAR_H))
         self.PanTitle.setStyleSheet(
             f"""
             QFrame#PanTitle {{
@@ -52,7 +52,7 @@ class Ui_FormMain(object):
 
         # 主 Panel
         self.PanMain = QtWidgets.QFrame(FormMain)
-        self.PanMain.setGeometry(QtCore.QRect(0, 48, size[0], (size[1] - 48)))
+        self.PanMain.setGeometry(QtCore.QRect(0, setup.TITLE_BAR_H, size[0], (size[1] - 48)))
         self.PanMain.setStyleSheet(
             f"""
             QFrame#PanMain {{
@@ -75,12 +75,12 @@ class Ui_FormMain(object):
             tooltip="Exit",
             padding=(7, 7, -10, -10),
         )
-        self.BtnExit.setGeometry(QtCore.QRect((size[0] - 50), 12, 13, 13))
+        self.BtnExit.setGeometry(QtCore.QRect((size[0] - 50), 15, 14, 14))
         self.BtnExit.setObjectName("BtnExit")
 
         # 标题栏按钮 -- 最小化
         self.BtnMin = QtWidgets.QPushButton(self.PanTitle)
-        self.BtnMin.setGeometry(QtCore.QRect((size[0] - 100), 0, 40, 40))
+        self.BtnMin.setGeometry(QtCore.QRect((size[0] - 98), 2, 40, 40))
         self.BtnMin.setStyleSheet("background-color: transparent;")
         self.BtnMin.setText("—")
         self.BtnMin.setObjectName("BtnMin")
@@ -88,7 +88,7 @@ class Ui_FormMain(object):
         # 标题栏标签 -- 标题
         self.SVGTitle = QSvgWidget(self.PanTitle)
         self.SVGTitle.load("Images/svgtitle.svg")
-        self.SVGTitle.setGeometry(QtCore.QRect(0, 4, 120, 40))
+        self.SVGTitle.setGeometry(QtCore.QRect(2, 14, 76, 24))
         self.SVGTitle.setStyleSheet("background-color: transparent;")
         self.SVGTitle.setObjectName("SVGTitle")
 

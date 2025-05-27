@@ -12,6 +12,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 from FormMain_ui import Ui_FormMain
 from Controls.RoundShadow import RoundShadow
+from Modules.Base.ModSetup import mod_setup
 
 
 class FormMain(RoundShadow):
@@ -32,7 +33,7 @@ class FormMain(RoundShadow):
 
         # 窗口加载第一步：基础
         # 设置窗口大小
-        self.resize(850, 500)
+        self.resize(*mod_setup.SIZE)
         self.logger.write("窗口加载第一步完成", LT.INFO)
 
         # 窗口加载第二步：加载 UI 控件
@@ -94,9 +95,9 @@ class FormMain(RoundShadow):
         self.container.setGeometry(9, 9, self.width() - 18, self.height() - 18)
 
         # 更新面板大小
-        self.ui.PanTitle.setGeometry(0, 0, self.container.width(), 40)
+        self.ui.PanTitle.setGeometry(0, 0, self.container.width(), mod_setup.TITLE_BAR_H)
         self.ui.PanMain.setGeometry(
-            0, 40, self.container.width(), self.container.height() - 40
+            0, mod_setup.TITLE_BAR_H, self.container.width(), self.container.height() - mod_setup.TITLE_BAR_H
         )
 
     def close_window(self):

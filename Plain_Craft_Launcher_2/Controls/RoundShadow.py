@@ -10,7 +10,7 @@ class RoundShadow(QWidget):
 
     def __init__(self):
         super().__init__()
-        self.border_width = setup.corner_radius # 从设置中获取圆角值
+        self.border_width = setup.CORNER_RADIUS # 从设置中获取圆角值
         # 设置 窗口无边框和背景透明 *必须
         self.setAttribute(Qt.WA_TranslucentBackground)
         # 修改窗口标志，添加系统菜单和最小化按钮标志
