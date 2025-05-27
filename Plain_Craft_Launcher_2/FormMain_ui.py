@@ -9,19 +9,18 @@ from PyQt5.QtSvg import QSvgWidget
 from PyQt5.QtCore import Qt
 
 from Controls.MyRoundButton import MyRoundButton
-from Modules.Base.ModSetup import ModSetup as Setup
+from Modules.Base.ModSetup import mod_setup as setup
 
 
 class Ui_FormMain(object):
 
     def setupUi(self, FormMain: QtWidgets.QWidget):
         # 获取所有需要的设置项
-        setup = Setup()
         size = setup.size
 
-        corner_radius = setup.get_settings("corner_radius")
-        bg_color = setup.get_settings("ColorBrush5")
-        fg_color = setup.get_settings("ColorBrush2")
+        corner_radius = setup.corner_radius
+        bg_color = setup.color_brush_5
+        fg_color = setup.color_brush_2
 
         FormMain.setObjectName("FormMain")
         FormMain.resize(*size)

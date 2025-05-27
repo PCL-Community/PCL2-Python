@@ -7,20 +7,7 @@ from .ModLogging import ModLogging, LoggingType as LT
 class ModSetup:
     """写入/读取设置相关的类"""
 
-    _instance = None
-
-    def __new__(cls):
-        """单例模式"""
-        if cls._instance is None:
-            cls._instance = super(ModSetup, cls).__new__(cls)
-            cls._instance._initialized = False
-        return cls._instance
-
     def __init__(self):
-        if self._initialized:
-            return
-        self._initialized = True
-
         self.logger = ModLogging(module_name="ModSetup")
         self.load_settings()
         self.logger.write("ModSetup 加载完成", LT.INFO)
@@ -28,10 +15,10 @@ class ModSetup:
     def setup_settings(self):
         """初始化设置项"""
         self.ColorBrush1 = "#343d4a"
-        self.ColorBrush2 = "#0F6FCD"
+        self.color_brush_2 = "#0F6FCD"
         self.ColorBrush3 = "#1370f3"
         self.ColorBrush4 = "#4890f5"
-        self.ColorBrush5 = "#96c0f9"
+        self.color_brush_5 = "#96c0f9"
         self.ColorBrush6 = "#d5e6fd"
         self.ColorBrush7 = "#e0eafd"
         self.ColorBrush8 = "#eaf2fe"
@@ -63,19 +50,5 @@ class ModSetup:
 
         self.logger.write("设置文件保存成功", LT.INFO)
 
-    def get_settings(self, setting: str) -> Any:
-        """获取设置"""
-        return getattr(self, setting, None)
 
-    def set_settings(self, setting: str, value: Any) -> None:
-        """设置设置"""
-        setattr(self, setting, value)
-        self.save_settings()
-
-    def __getitem__(self, key: str) -> Any:
-        """重载 [] 运算符"""
-        return self.get_settings(key)
-
-    def __setitem__(self, key: str, value: Any) -> None:
-        """重载 [] 运算符"""
-        self.set_settings(key, value)
+mod_setup = ModSetup()
