@@ -29,7 +29,8 @@ jobs:
       # 运行你的 Python 脚本
       - name: Start Building Via Nuitka
         run: |
-          .\Plain_Craft_Launcher_2\build.cmd
+          cd Plain_Craft_Launcher_2
+          .\build.cmd
           
       # 配置 Git 推送
       - name: Commit and push changes
@@ -38,6 +39,6 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add Custom.xaml
+          git add .
           git commit -m "Build new binary distribution for Application.py."
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/PCL-Community/PCL2-Python.git HEAD:main
