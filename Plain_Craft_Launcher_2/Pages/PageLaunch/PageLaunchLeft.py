@@ -12,7 +12,7 @@ class PageLaunchLeft(QWidget):
         self.setFixedWidth(300)
         
         # 设置背景色
-        self.setStyleSheet(f"background-color: {ModSetup().get_settings("ColorBrush0")};")
+        self.setStyleSheet(f"background-color: {ModSetup().get_settings('ColorBrush0')};")
         
         # 设置对齐方式
         self.setContentsMargins(0, 0, 0, 0)
