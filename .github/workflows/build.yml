@@ -7,7 +7,7 @@ on:
 
 jobs:
   update-file:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       # 检出代码仓库
@@ -29,8 +29,9 @@ jobs:
       # 运行你的 Python 脚本
       - name: Start Building Via Nuitka
         run: |
-          python -m nuitka --standalone --onefile --enable-plugin=pyqt5 --include-package=PyQt5 --include-package=PyQt5.QtSvg --include-package=PyQt5.QtCore --include-package=PyQt5.QtGui --include-package=PyQt5.QtWidgets --windows-icon-from-ico=./Plain_Craft_Launcher_2/Images/icon.ico --output-dir=dist --windows-console-mode=disable --follow-imports --remove-output --assume-yes-for-downloads --show-progress --show-memory --include-data-dir=./Plain_Craft_Launcher_2/Images=Images --include-module=_ctypes ./Plain_Craft_Launcher_2/Application.py
-
+          cd Plain_Craft_Launcher_2
+          .\build.cmd
+          
       # 配置 Git 推送
       - name: Commit and push changes
         env:
@@ -38,6 +39,6 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add Custom.xaml
-          git commit -m "Update Custom.xaml with new Wiki content"
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/CreeperIsASpy/WikiHomepage-PCL.git HEAD:main
+          git add .
+          git commit -m "Build new binary distribution for Application.py."
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/PCL-Community/PCL2-Python.git HEAD:main

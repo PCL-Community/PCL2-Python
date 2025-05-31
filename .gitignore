@@ -1,6 +1,7 @@
 # Editor Config
-idea/
+.idea/
 .vs/
+.vscode/
 
 # Python Environment & Cache
 **/*venv*/
