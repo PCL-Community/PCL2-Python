@@ -10,6 +10,7 @@ from PyQt5.QtCore import Qt
 
 from Controls.MyRoundButton import MyRoundButton
 from Modules.Base.ModSetup import ModSetup as Setup
+from Pages.PageLaunch.PageLaunchLeft import PageLaunchLeft
 
 class Ui_FormMain(object):
     def setupUi(self, FormMain: QtWidgets.QWidget):
@@ -30,11 +31,13 @@ class Ui_FormMain(object):
         
         # 标题栏 Panel
         self.PanTitle = QtWidgets.QFrame(FormMain)
-        self.PanTitle.setGeometry(QtCore.QRect(0, 0, size[0], 40))
-        self.PanTitle.setBaseSize(QtCore.QSize(size[0], 40))
+        title_height = 48 
+        self.PanTitle.setGeometry(QtCore.QRect(0, 0, size[0], title_height))
+        self.PanTitle.setBaseSize(QtCore.QSize(size[0], title_height))
         self.PanTitle.setStyleSheet(f"""
             QFrame#PanTitle {{
-                background-color: {fg_color};
+                background-color: qlineargradient(spread:pad, x1:0.99, y1:0.01, x2:0, y2:1, 
+                                              stop:0 {setup.get_settings('ColorBrush2')}, stop:1 {setup.get_settings('ColorBrush3')});
                 border-top-left-radius: {corner_radius}px;
                 border-top-right-radius: {corner_radius}px;
                 border-bottom: none;
@@ -46,35 +49,36 @@ class Ui_FormMain(object):
 
         # 主 Panel
         self.PanMain = QtWidgets.QFrame(FormMain)
-        self.PanMain.setGeometry(QtCore.QRect(0, 40, size[0], (size[1] - 40))) 
+        self.PanMain.setGeometry(QtCore.QRect(300, title_height, size[0], (size[1] - title_height))) 
         self.PanMain.setStyleSheet(f"""
             QFrame#PanMain {{
-                background-color: {bg_color};
+                background-color: qlineargradient(spread:pad, x1:0.9, y1:0.1, x2:0, y2:1, 
+                                              stop:0 {setup.get_settings('ColorBrush5')}, stop:1 {setup.get_settings('ColorBrush6')});
                 border-bottom-left-radius: {corner_radius}px;
                 border-bottom-right-radius: {corner_radius}px;
-                border-top: none;
             }}
         """)
         self.PanMain.setFrameShape(QtWidgets.QFrame.NoFrame) 
         self.PanMain.setFrameShadow(QtWidgets.QFrame.Plain)  
         self.PanMain.setObjectName("PanMain")
 
+        # 左侧 Panel
+        self.PanLeft = PageLaunchLeft(FormMain)
+
         # 标题栏按钮 -- 退出
-        self.BtnExit = MyRoundButton(self.PanTitle, svg_path="Images/BtnTitleClose.svg", size=(28, 28), tooltip="Exit", padding=(6, 6, -10, -10))
-        self.BtnExit.setGeometry(QtCore.QRect((size[0] - 60), 4, 28, 28))
+        self.BtnExit = MyRoundButton(self.PanTitle, svg_path="Images/BtnTitleExit.svg", size=(36, 36), tooltip="Exit")
+        self.BtnExit.setGeometry(QtCore.QRect((size[0] - 72), 8, 36, 36)) 
         self.BtnExit.setObjectName("BtnExit")
 
         # 标题栏按钮 -- 最小化
-        self.BtnMin = QtWidgets.QPushButton(self.PanTitle)
-        self.BtnMin.setGeometry(QtCore.QRect((size[0] - 100), 0, 40, 40))
-        self.BtnMin.setStyleSheet("background-color: transparent;")
-        self.BtnMin.setText("—")
+        self.BtnMin = MyRoundButton(self.PanTitle, svg_path="Images/BtnTitleMin.svg", size=(36, 36), tooltip="Minisize")
+        self.BtnMin.setGeometry(QtCore.QRect((size[0] - 120), 8, 36, 36)) 
         self.BtnMin.setObjectName("BtnMin")
 
         # 标题栏标签 -- 标题
         self.SVGTitle = QSvgWidget(self.PanTitle)
         self.SVGTitle.load("Images/svgtitle.svg")
-        self.SVGTitle.setGeometry(QtCore.QRect(0, 4, 120, 40))
+        self.SVGTitle.setGeometry(QtCore.QRect(8, 8, 120, 40))  # 缩小尺寸
         self.SVGTitle.setStyleSheet("background-color: transparent;")
         self.SVGTitle.setObjectName("SVGTitle")
 

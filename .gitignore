@@ -15,3 +15,4 @@ Plain_Craft_Launcher_2/data/*.log
 **/.minecraft/
 **/dist/*
 nuitka-crash-report.xml
+icon/

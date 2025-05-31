@@ -88,9 +88,10 @@ class FormMain(RoundShadow):
         # 更新容器大小
         self.container.setGeometry(9, 9, self.width() - 18, self.height() - 18)
         
-        # 更新面板大小
-        self.ui.PanTitle.setGeometry(0, 0, self.container.width(), 40)
-        self.ui.PanMain.setGeometry(0, 40, self.container.width(), self.container.height() - 40)
+        # 更新面板大小，标题栏高度为窗口高度的10%
+        title_height = int(self.container.height() * 0.1)
+        self.ui.PanTitle.setGeometry(0, 0, self.container.width(), title_height)
+        self.ui.PanMain.setGeometry(0, title_height, self.container.width(), self.container.height() - title_height)
 
     def close_window(self):
         """处理窗口关闭（对应的信号：BtnExit.clicked）"""

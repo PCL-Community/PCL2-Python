@@ -10,7 +10,7 @@ class MyRoundButton(QPushButton):
     一个可以显示 SVG 图标的圆形按钮，支持悬停效果和点击效果
     """
     
-    def __init__(self, parent=None, svg_path="", size=(64, 64), tooltip="", 
+    def __init__(self, parent=None, svg_path="", size=(36, 36), tooltip="", 
                  svg_size=None,
                  border_width=1, border_color=QColor(255, 255, 255, 0),
                  svg_color=QColor(255, 255, 255, 255),
@@ -21,7 +21,7 @@ class MyRoundButton(QPushButton):
         Args:
             parent: 父控件
             svg_path: SVG 文件路径
-            size: 按钮大小，默认为 (64, 64)
+            size: 按钮大小，默认为 (36, 36)
             tooltip: 鼠标悬停提示文本
             svg_size: SVG 图标大小，默认与按钮大小相同
             border_width: 边框宽度，默认为 1
@@ -30,6 +30,10 @@ class MyRoundButton(QPushButton):
             margin: SVG 图标外边距，格式为 (左, 上, 右, 下)，默认为 (0, 0, 0, 0)
             padding: SVG 图标内边距，格式为 (左, 上, 右, 下)，默认为 (0, 0, 0, 0)
         """
+        # 如果提供了svg_size，则按钮尺寸应该比svg尺寸大8px
+        if svg_size is not None:
+            size = (svg_size[0] + 8, svg_size[1] + 8)
+            
         super().__init__(parent)
         
         # 设置按钮属性
@@ -58,7 +62,10 @@ class MyRoundButton(QPushButton):
         self.svg_widget.load(svg_path)
         
         # 设置 SVG 控件大小和位置
-        self.svg_size = svg_size if svg_size is not None else size
+        # 如果没有指定SVG大小，则默认为按钮大小减8px
+        if svg_size is None:
+            svg_size = (size[0] - 8, size[1] - 8)
+        self.svg_size = svg_size
         self.margin = margin  # 设置外边距 (左, 上, 右, 下)
         self.padding = padding  # 设置内边距 (左, 上, 右, 下)
         self.centerSvg()  # 居中 SVG 图标
@@ -256,7 +263,8 @@ class MyRoundButton(QPushButton):
             # 悬停状态 - 50% 透明度
             bg_color = QColor(255, 255, 255, 127)
             border_color = QColor(self.border_color)
-            border_color.setAlpha(127)
+            # border_color.setAlpha(127) 这里边框做成全透明更好看
+            border_color.setAlpha(0)
         else:
             # 正常状态 - 完全透明
             bg_color = QColor(255, 255, 255, 0)

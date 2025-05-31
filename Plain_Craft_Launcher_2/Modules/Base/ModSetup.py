@@ -25,6 +25,7 @@ class ModSetup:
 
     def setup_settings(self):
         """初始化设置项"""
+        self.ColorBrush0 = "#ffffff"
         self.ColorBrush1 = "#343d4a"
         self.ColorBrush2 = "#0b5bcb"
         self.ColorBrush3 = "#1370f3"
