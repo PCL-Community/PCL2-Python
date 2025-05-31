@@ -1,10 +1,13 @@
+<div align="center">
 <a href="https://github.com/PCL-Community/PCL2-Python">
     <img src="Plain_Craft_Launcher_2/Images/icon.ico" alt="Logo" width="80" height="80">
 </a>
 
 # PCL2-Python
 
-[![Hits](https://hits.zkitefly.eu.org/?tag=https://github.com/PCL-Community/PCL2-Python)](https://hits.zkitefly.eu.org/?tag=https://github.com/PCL-Community/PCL2-Python&web=true)  
+[![Hits](https://hits.zkitefly.eu.org/?tag=https://github.com/PCL-Community/PCL2-Python)](https://hits.zkitefly.eu.org/?tag=https://github.com/PCL-Community/PCL2-Python&web=true) 
+</div>
+ 
 使用 Python 语言制作的 PCL2 仿制版本，UI 框架使用`PyQt5`，minecraft 启动框架使用`minecraft-launcher-lib`，微软登录使用`msal`（设备流）。  
 由于作者技术不精、学业紧张，目前正在早期开发阶段徘徊。
 
