@@ -38,6 +38,7 @@ class ModSetup:
         self.ColorBrushBg1 = "#bee0eafd"
         self.corner_radius = 10
         self.size = (900, 550)
+        self.title_height = 48
 
         self.logger.write("设置初始化完成", LT.INFO)
 

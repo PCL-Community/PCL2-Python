@@ -10,7 +10,7 @@ from PyQt5.QtCore import Qt
 
 from Controls.MyRoundButton import MyRoundButton
 from Modules.Base.ModSetup import ModSetup as Setup
-from Pages.PageLaunch.PageLaunchLeft import PageLaunchLeft
+from Pages.PageLaunch.PageLaunch import PageLaunch
 
 class Ui_FormMain(object):
     def setupUi(self, FormMain: QtWidgets.QWidget):
@@ -49,7 +49,7 @@ class Ui_FormMain(object):
 
         # 主 Panel
         self.PanMain = QtWidgets.QFrame(FormMain)
-        self.PanMain.setGeometry(QtCore.QRect(300, title_height, size[0], (size[1] - title_height))) 
+        self.PanMain.setGeometry(QtCore.QRect(0, title_height, size[0], (size[1] - title_height))) 
         self.PanMain.setStyleSheet(f"""
             QFrame#PanMain {{
                 background-color: qlineargradient(spread:pad, x1:0.9, y1:0.1, x2:0, y2:1, 
@@ -61,9 +61,6 @@ class Ui_FormMain(object):
         self.PanMain.setFrameShape(QtWidgets.QFrame.NoFrame) 
         self.PanMain.setFrameShadow(QtWidgets.QFrame.Plain)  
         self.PanMain.setObjectName("PanMain")
-
-        # 左侧 Panel
-        self.PanLeft = PageLaunchLeft(FormMain)
 
         # 标题栏按钮 -- 退出
         self.BtnExit = MyRoundButton(self.PanTitle, svg_path="Images/BtnTitleExit.svg", size=(36, 36), tooltip="Exit")
@@ -82,6 +79,10 @@ class Ui_FormMain(object):
         self.SVGTitle.setStyleSheet("background-color: transparent;")
         self.SVGTitle.setObjectName("SVGTitle")
 
+        self.page = PageLaunch(self.PanMain)
+        self.page.setGeometry(QtCore.QRect(0, 0, size[0], (size[1] - title_height)))
+        self.page.setObjectName("PageLaunch")
+        self.page.raise_()
 
         self.retranslateUi(FormMain)
         QtCore.QMetaObject.connectSlotsByName(FormMain)

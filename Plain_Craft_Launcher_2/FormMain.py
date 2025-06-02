@@ -12,6 +12,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 from FormMain_ui import Ui_FormMain
 from Controls.RoundShadow import RoundShadow
+from Modules.Base.ModSetup import ModSetup as Setup
 
 class FormMain(RoundShadow):
     """主窗口"""
@@ -88,10 +89,13 @@ class FormMain(RoundShadow):
         # 更新容器大小
         self.container.setGeometry(9, 9, self.width() - 18, self.height() - 18)
         
-        # 更新面板大小，标题栏高度为窗口高度的10%
-        title_height = int(self.container.height() * 0.1)
+        title_height = Setup().get_settings('title_height')
         self.ui.PanTitle.setGeometry(0, 0, self.container.width(), title_height)
         self.ui.PanMain.setGeometry(0, title_height, self.container.width(), self.container.height() - title_height)
+        
+        # 更新PageLaunch大小
+        self.ui.page.setGeometry(0, 0, self.ui.PanMain.width(), self.ui.PanMain.height())
+        self.ui.page.raise_()
 
     def close_window(self):
         """处理窗口关闭（对应的信号：BtnExit.clicked）"""
