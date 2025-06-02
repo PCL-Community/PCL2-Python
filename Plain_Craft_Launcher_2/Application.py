@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import *
 import sys
 
 from FormMain import FormMain
