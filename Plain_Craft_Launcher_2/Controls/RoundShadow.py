@@ -3,14 +3,14 @@ from PyQt5.QtWidgets import QWidget
 from PyQt5.QtCore import Qt, QRectF
 from PyQt5.QtGui import QPainter, QPainterPath, QBrush, QColor, QPaintEvent
 
-from Modules.Base.ModSetup import ModSetup as Setup
+from Modules.Base.ModSetup import mod_setup as setup
 
 class RoundShadow(QWidget):
     """圆角边框类"""
 
     def __init__(self):
         super().__init__()
-        self.border_width = Setup().get_settings('corner_radius')  # 从设置中获取圆角值
+        self.border_width = setup.CORNER_RADIUS # 从设置中获取圆角值
         # 设置 窗口无边框和背景透明 *必须
         self.setAttribute(Qt.WA_TranslucentBackground)
         # 修改窗口标志，添加系统菜单和最小化按钮标志
