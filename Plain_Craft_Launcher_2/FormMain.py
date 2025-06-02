@@ -93,7 +93,7 @@ class FormMain(RoundShadow):
         self.ui.PanTitle.setGeometry(0, 0, self.container.width(), title_height)
         self.ui.PanMain.setGeometry(0, title_height, self.container.width(), self.container.height() - title_height)
         
-        # 更新PageLaunch大小
+        # 更新PageLaunch大小并确保它在最上层
         self.ui.page.setGeometry(0, 0, self.ui.PanMain.width(), self.ui.PanMain.height())
         self.ui.page.raise_()
 

@@ -18,7 +18,10 @@ class PageLaunch(QWidget):
         self.logger = ModLogging(module_name="PageLaunch")
         self.logger.write("启动页加载中", LT.INFO)
 
-        # 使用明确的样式表
+        # 先设置objectName
+        self.setObjectName("PageLaunch")
+        
+        # 再设置样式表
         self.setStyleSheet("QWidget#PageLaunch { background-color: #000000; }")
 
         # 初始化左侧 Panel 
