@@ -21,8 +21,10 @@ class PageLaunch(QWidget):
         # 先设置objectName
         self.setObjectName("PageLaunch")
         
-        # 再设置样式表
-        self.setStyleSheet("QWidget#PageLaunch { background-color: #000000; }")
+        # 使用 setAttribute 确保背景色生效
+        self.setAttribute(QtCore.Qt.WA_StyledBackground, True)
+        # 设置样式表
+        self.setStyleSheet("QWidget#PageLaunch { background-color: transparent; }")
 
         # 初始化左侧 Panel 
         self.PanLeft = PageLaunchLeft(self)
