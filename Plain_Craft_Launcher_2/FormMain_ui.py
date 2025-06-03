@@ -72,10 +72,10 @@ class Ui_FormMain(object):
         self.BtnMin.setGeometry(QtCore.QRect((size[0] - 120), 8, 36, 36)) 
         self.BtnMin.setObjectName("BtnMin")
 
-        # 标题栏标签 -- 标题
+        # 标题栏 Svg -- 标题
         self.SVGTitle = QSvgWidget(self.PanTitle)
         self.SVGTitle.load("Images/svgtitle.svg")
-        self.SVGTitle.setGeometry(QtCore.QRect(8, 8, 120, 40))  # 缩小尺寸
+        self.SVGTitle.setGeometry(QtCore.QRect(8, 8, 120, 40))
         self.SVGTitle.setStyleSheet("background-color: transparent;")
         self.SVGTitle.setObjectName("SVGTitle")
 
