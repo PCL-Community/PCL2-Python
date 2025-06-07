@@ -10,7 +10,7 @@ import sys
 from ModMsAuth import MinecraftMicrosoftLogin
 import minecraft_launcher_lib as mclib
 
-from ModSecret import ModSecret
+from Modules.Base import ModSecret
 
 CLIENT_ID = ModSecret().client_id
 

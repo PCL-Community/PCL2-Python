@@ -24,7 +24,13 @@ class PageLaunch(QWidget):
         # 使用 setAttribute 确保背景色生效
         self.setAttribute(QtCore.Qt.WA_StyledBackground, True)
         # 设置样式表
-        self.setStyleSheet("QWidget#PageLaunch { background-color: transparent; }")
+        self.setStyleSheet(f"""
+            QWidget#PageLaunch {{
+                background-color: transparent;
+                border-bottom-left-radius: {Setup().get_settings('corner_radius')}px;
+            }}
+        """)
+
 
         # 初始化左侧 Panel 
         self.PanLeft = PageLaunchLeft(self)
