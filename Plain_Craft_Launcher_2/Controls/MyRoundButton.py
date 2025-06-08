@@ -35,7 +35,6 @@ class MyRoundButton(QPushButton):
             size = (svg_size[0] + 8, svg_size[1] + 8)
             
         super().__init__(parent)
-        
         # 设置按钮属性
         self.setFixedSize(*size)
         self.setToolTip(tooltip)

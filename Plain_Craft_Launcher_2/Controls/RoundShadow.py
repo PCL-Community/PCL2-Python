@@ -122,6 +122,9 @@ class RoundShadow(QWidget):
             min_height = 200
             if new_geometry.width() >= min_width and new_geometry.height() >= min_height:
                 self.setGeometry(new_geometry)
+                # 更新起始位置和几何形状，防止鼠标与边缘位置差距累积
+                self.resize_start_pos = event.globalPos()
+                self.resize_start_geometry = self.geometry()
             
             event.accept()
             return
