@@ -12,6 +12,7 @@ from Controls.MyRoundButton import MyRoundButton
 from Controls.MyIconTextButton import MyIconTextButton
 from Modules.Base.ModSetup import ModSetup as Setup
 from Pages.PageLaunch.PageLaunch import PageLaunch
+from Modules.Base.ModPage import ModPage as Page
 
 
 class Ui_FormMain(object):
@@ -22,6 +23,7 @@ class Ui_FormMain(object):
         corner_radius = setup.get_settings('corner_radius')
         bg_color = setup.get_settings('ColorBrush5')
         fg_color = setup.get_settings('ColorBrush2')
+        self.page_manager = Page()
 
         FormMain.setObjectName("FormMain")
         FormMain.resize(*size)
@@ -76,7 +78,7 @@ class Ui_FormMain(object):
 
         # 标题栏按钮 -- 切换到下载页面
         self.BtnPageLaunch = MyIconTextButton(self.PanTitle, svg_path="Images/BtnTitlePageLaunch.svg",
-                                              text="Launch")
+                                              text="Launch", command=lambda: self.page_manager.switch_page(self.ui.PanMain, "Launch"))
         self.BtnPageLaunch.setGeometry(QtCore.QRect(500, 8, 0, 0))                                
         self.BtnPageLaunch.setObjectName("BtnPageDownload")
 
