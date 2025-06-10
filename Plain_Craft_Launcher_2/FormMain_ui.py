@@ -74,11 +74,11 @@ class Ui_FormMain(object):
         self.BtnMin.setGeometry(QtCore.QRect((size[0] - 120), 8, 36, 36))
         self.BtnMin.setObjectName("BtnMin")
 
-        # 标题栏按钮 -- 切换到启动页面
+        # 标题栏按钮 -- 切换到下载页面
         self.BtnPageLaunch = MyIconTextButton(self.PanTitle, svg_path="Images/BtnTitlePageLaunch.svg",
                                               text="Launch")
         self.BtnPageLaunch.setGeometry(QtCore.QRect(500, 8, 0, 0))                                
-        self.BtnPageLaunch.setObjectName("BtnPageLaunch")
+        self.BtnPageLaunch.setObjectName("BtnPageDownload")
 
         # 标题栏 Svg -- 标题
         self.SVGTitle = QSvgWidget(self.PanTitle)
