@@ -79,7 +79,7 @@ class Ui_FormMain(object):
         # 标题栏按钮 -- 切换到下载页面
         self.BtnPageLaunch = MyIconTextButton(self.PanTitle, svg_path="Images/BtnTitlePageLaunch.svg",
                                               text="Launch",
-                                              command=lambda: self.page_manager.switch_page(self.PanMain, "Launch"))
+                                              command=lambda: self.page_manager.switch_page(self.PanMain, 0))
         self.BtnPageLaunch.setGeometry(QtCore.QRect(500, 8, 0, 0))                                
         self.BtnPageLaunch.setObjectName("BtnPageDownload")
 
