@@ -93,9 +93,7 @@ class FormMain(RoundShadow):
         self.ui.PanTitle.setGeometry(0, 0, self.container.width(), title_height)
         self.ui.PanMain.setGeometry(0, title_height, self.container.width(), self.container.height() - title_height)
         
-        # 更新PageLaunch大小并确保它在最上层
-        self.ui.page.setGeometry(0, 0, self.ui.PanMain.width(), self.ui.PanMain.height())
-        self.ui.page.raise_()
+        # 不需要单独更新页面大小，QStackedWidget 会自动调整子组件大小
 
     def close_window(self):
         """处理窗口关闭（对应的信号：BtnExit.clicked）"""

@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
-from PyQt5.QtWidgets import QWidget, QFrame
-import importlib
-import sys
+from PyQt5.QtWidgets import QStackedWidget
 
 from Modules.Base.ModLogging import ModLogging, LoggingType as LT
-from Modules.Base.ModSetup import ModSetup as Setup
-
 from Pages.PageLaunch.PageLaunch import PageLaunch
 from Pages.PageDownload.PageDownload import PageDownload
 
@@ -29,62 +25,38 @@ class ModPage:
             return
 
         self.logger = ModLogging(module_name="ModPage")
-        self.current_page = None
+        self.current_page_index = 0
         self._initialized = True
 
-    def switch_page(self, pan_main: QFrame, page_id: int) -> bool:
+    def switch_page(self, stack_widget: QStackedWidget, page_id: int) -> bool:
         """切换页面
         
         Args:
-            pan_main: 主面板，用于放置页面
-            page_id: 页面id，如"0"
+            stack_widget: QStackedWidget 实例
+            page_id: 页面索引，如 0 表示 PageLaunch
             
         Returns:
             bool: 切换是否成功
         """
-
-        try:
-            page_class = PAGES[page_id]
-        except IndexError:
-            self.logger.write(f"页面id {page_id} 不存在。", LT.ERROR)
+        # 检查页面索引是否有效
+        if page_id < 0 or page_id >= stack_widget.count():
+            self.logger.write(f"页面索引 {page_id} 超出范围 (0-{stack_widget.count()-1})。", LT.ERROR)
             return False
-
-        for widget in pan_main.findChildren(QWidget):
-            obj_name = widget.objectName()
-            if "Page" in obj_name:
-                self.current_page = widget
-
-        # 如果页面相同，不做任何事情
-        if self.current_page == page_class:
-            self.logger.write(f"页面 {page_class.__name__} 已经是当前页面，无需切换", LT.INFO)
+            
+        # 如果当前已经是该页面，则不做任何操作
+        if stack_widget.currentIndex() == page_id:
+            self.logger.write(f"页面 {page_id} 已经是当前页面，无需切换", LT.INFO)
             return True
-
-        # 记录新页面名称
-        self.logger.write(f"正在切换到页面: {page_class.__name__}", LT.INFO)
-
-        # 删除 PanMain 中的所有子组件
-        for child in pan_main.findChildren(QWidget):
-            child.setParent(None)
-            child.deleteLater()
-
-        # 根据传入的页面名称，实例化对应的页面
+            
+        # 记录新页面索引
+        self.logger.write(f"正在切换到页面索引: {page_id}", LT.INFO)
+        
+        # 使用 QStackedWidget 的原生方法切换页面
         try:
-
-            # 实例化页面
-            page_instance = page_class(pan_main)
-
-            # 设置页面大小
-            page_instance.setGeometry(0, 0, pan_main.width(), pan_main.height())
-
-            # 确保页面在最上层
-            page_instance.raise_()
-
-            # 更新当前页面名称
-            self.current_page = page_class
-
-            self.logger.write(f"成功切换到页面: {page_class.__name__}", LT.INFO)
+            stack_widget.setCurrentIndex(page_id)
+            self.current_page_index = page_id
+            self.logger.write(f"成功切换到页面索引: {page_id}", LT.INFO)
             return True
-
         except Exception as e:
-            self.logger.write(f"切换到页面 {page_class.__name__} 时发生错误: {e}", LT.ERROR)
+            self.logger.write(f"切换到页面索引 {page_id} 时发生错误: {e}", LT.ERROR)
             return False

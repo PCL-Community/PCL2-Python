@@ -35,3 +35,10 @@ class PageLaunch(QWidget):
         # 初始化左侧 Panel 
         self.PanLeft = PageLaunchLeft(self)
         self.PanLeft.setGeometry(QtCore.QRect(0, 0, 300, (setup.get_settings("size")[1] - setup.get_settings("title_height"))))
+
+
+    def resizeEvent(self, event):
+        """处理页面大小变化"""
+        super().resizeEvent(event)
+        # 更新左侧面板高度
+        self.PanLeft.setFixedHeight(self.height())

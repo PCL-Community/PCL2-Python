@@ -52,18 +52,16 @@ class Ui_FormMain(object):
         self.PanTitle.setObjectName("PanTitle")
 
         # 主 Panel
-        self.PanMain = QtWidgets.QFrame(FormMain)
+        self.PanMain = QtWidgets.QStackedWidget(FormMain)
         self.PanMain.setGeometry(QtCore.QRect(0, title_height, size[0], (size[1] - title_height)))
         self.PanMain.setStyleSheet(f"""
-            QFrame#PanMain {{
+            QStackedWidget#PanMain {{
                 background-color: qlineargradient(spread:pad, x1:0.9, y1:0.1, x2:0, y2:1, 
                                               stop:0 {setup.get_settings('ColorBrush5')}, stop:1 {setup.get_settings('ColorBrush6')});
                 border-bottom-left-radius: {corner_radius}px;
                 border-bottom-right-radius: {corner_radius}px;
             }}
         """)
-        self.PanMain.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.PanMain.setFrameShadow(QtWidgets.QFrame.Plain)
         self.PanMain.setObjectName("PanMain")
 
         # 标题栏按钮 -- 退出
@@ -77,9 +75,9 @@ class Ui_FormMain(object):
         self.BtnMin.setObjectName("BtnMin")
 
         # 标题栏按钮 -- 切换到下载页面
+        # 标题栏按钮 -- 切换到启动页面
         self.BtnPageLaunch = MyIconTextButton(self.PanTitle, svg_path="Images/BtnTitlePageLaunch.svg",
-                                              text="Launch",
-                                              command=lambda: self.page_manager.switch_page(self.PanMain, 0))
+                                              text="Launch", command=lambda: self.page_manager.switch_page(self.PanMain, 0))
         self.BtnPageLaunch.setGeometry(QtCore.QRect(500, 8, 0, 0))                                
         self.BtnPageLaunch.setObjectName("BtnPageDownload")
 
@@ -90,10 +88,18 @@ class Ui_FormMain(object):
         self.SVGTitle.setStyleSheet("background-color: transparent;")
         self.SVGTitle.setObjectName("SVGTitle")
 
-        self.page = PageLaunch(self.PanMain)
-        self.page.setGeometry(QtCore.QRect(0, 0, size[0], (size[1] - title_height)))
-        self.page.setObjectName("PageLaunch")
-        self.page.raise_()
+        # 添加页面到 QStackedWidget
+        self.page_launch = PageLaunch()
+        self.PanMain.addWidget(self.page_launch)
+        
+        # 如果有 PageDownload，也添加进来
+        from Pages.PageDownload.PageDownload import PageDownload
+        self.page_download = PageDownload()
+        self.PanMain.addWidget(self.page_download)
+        
+        # 默认显示第一个页面
+        self.PanMain.setCurrentIndex(0)
+
 
         self.retranslateUi(FormMain)
         QtCore.QMetaObject.connectSlotsByName(FormMain)
