@@ -100,7 +100,6 @@ class Ui_FormMain(object):
         # 默认显示第一个页面
         self.PanMain.setCurrentIndex(0)
 
-
         self.retranslateUi(FormMain)
         QtCore.QMetaObject.connectSlotsByName(FormMain)
 

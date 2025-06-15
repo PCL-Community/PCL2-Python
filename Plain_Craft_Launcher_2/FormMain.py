@@ -92,6 +92,9 @@ class FormMain(RoundShadow):
         title_height = Setup().get_settings('title_height')
         self.ui.PanTitle.setGeometry(0, 0, self.container.width(), title_height)
         self.ui.PanMain.setGeometry(0, title_height, self.container.width(), self.container.height() - title_height)
+
+        self.ui.BtnMin.setGeometry(QRect((self.container.width() - 120), 8, 36, title_height))
+        self.ui.BtnExit.setGeometry(QRect((self.container.width() - 72), 8, 36, title_height))
         
         # 不需要单独更新页面大小，QStackedWidget 会自动调整子组件大小
 
