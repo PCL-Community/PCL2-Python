@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# 不许做单例模式！！！！！！！！！！！！！！！
 from PyQt5.QtWidgets import QStackedWidget
 
 from Modules.Base.ModLogging import ModLogging, LoggingType as LT
@@ -11,22 +12,9 @@ PAGES = (PageLaunch, PageDownload)
 class ModPage:
     """页面管理模块，负责页面切换逻辑"""
 
-    _instance = None
-
-    def __new__(cls):
-        """单例模式"""
-        if cls._instance is None:
-            cls._instance = super(ModPage, cls).__new__(cls)
-            cls._instance._initialized = False
-        return cls._instance
-
     def __init__(self):
-        if self._initialized:
-            return
-
         self.logger = ModLogging(module_name="ModPage")
         self.current_page_index = 0
-        self._initialized = True
 
     def switch_page(self, stack_widget: QStackedWidget, page_id: int) -> bool:
         """切换页面
@@ -60,3 +48,27 @@ class ModPage:
         except Exception as e:
             self.logger.write(f"切换到页面索引 {page_id} 时发生错误: {e}", LT.ERROR)
             return False
+
+
+class ModPagePanMain(ModPage):
+    """主面板页面管理模块，负责将所有页面添加到主面板并管理切换"""
+    
+    def __init__(self, pan_main: QStackedWidget):
+        super().__init__()
+        self.pan_main = pan_main
+        
+        # 初始化所有页面
+        for page_class in PAGES:
+            page = page_class(self.pan_main)
+            self.pan_main.addWidget(page)
+    
+    def switch_page(self, page_id: int) -> bool:
+        """重写切换页面方法，简化调用方式
+        
+        Args:
+            page_id: 页面索引，如 0 表示 PageLaunch
+            
+        Returns:
+            bool: 切换是否成功
+        """
+        return super().switch_page(self.pan_main, page_id)

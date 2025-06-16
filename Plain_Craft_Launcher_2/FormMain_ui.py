@@ -11,8 +11,8 @@ from PyQt5.QtCore import Qt
 from Controls.MyRoundButton import MyRoundButton
 from Controls.MyIconTextButton import MyIconTextButton
 from Modules.Base.ModSetup import ModSetup as Setup
-from Pages.PageLaunch.PageLaunch import PageLaunch
-from Modules.Base.ModPage import ModPage as Page
+from Modules.Base.ModPage import ModPagePanMain
+
 
 
 class Ui_FormMain(object):
@@ -21,9 +21,6 @@ class Ui_FormMain(object):
         setup = Setup()
         size = setup.get_settings('size')
         corner_radius = setup.get_settings('corner_radius')
-        bg_color = setup.get_settings('ColorBrush5')
-        fg_color = setup.get_settings('ColorBrush2')
-        self.page_manager = Page()
 
         FormMain.setObjectName("FormMain")
         FormMain.resize(*size)
@@ -63,23 +60,28 @@ class Ui_FormMain(object):
             }}
         """)
         self.PanMain.setObjectName("PanMain")
+        self.page_manager = ModPagePanMain(self.PanMain) # 初始化必须放在这
 
         # 标题栏按钮 -- 退出
         self.BtnExit = MyRoundButton(self.PanTitle, svg_path="Images/BtnTitleExit.svg", size=(36, 36), tooltip="Exit")
-        self.BtnExit.setGeometry(QtCore.QRect((size[0] - 72), 8, 36, 36))
+        self.BtnExit.setGeometry(QtCore.QRect((size[0] - 16), 8, 36, 36))
         self.BtnExit.setObjectName("BtnExit")
 
         # 标题栏按钮 -- 最小化
         self.BtnMin = MyRoundButton(self.PanTitle, svg_path="Images/BtnTitleMin.svg", size=(36, 36), tooltip="Minisize")
-        self.BtnMin.setGeometry(QtCore.QRect((size[0] - 120), 8, 36, 36))
+        self.BtnMin.setGeometry(QtCore.QRect((size[0] - 64), 8, 36, 36))
         self.BtnMin.setObjectName("BtnMin")
 
         # 标题栏按钮 -- 切换到下载页面
+        self.BtnPageDownload = MyIconTextButton(self.PanTitle, svg_path="Images/BtnTitlePageDownload.svg",
+                                              text="Download", command=lambda: self.page_manager.switch_page(1))
+        self.BtnPageDownload.setGeometry(QtCore.QRect(600, 8, 0, 0))                                
+        self.BtnPageDownload.setObjectName("BtnPageDownload")
         # 标题栏按钮 -- 切换到启动页面
         self.BtnPageLaunch = MyIconTextButton(self.PanTitle, svg_path="Images/BtnTitlePageLaunch.svg",
-                                              text="Launch", command=lambda: self.page_manager.switch_page(self.PanMain, 0))
-        self.BtnPageLaunch.setGeometry(QtCore.QRect(500, 8, 0, 0))                                
-        self.BtnPageLaunch.setObjectName("BtnPageDownload")
+                                              text="Launch", command=lambda: self.page_manager.switch_page(0))
+        self.BtnPageLaunch.setGeometry(QtCore.QRect(420, 8, 0, 0))                                
+        self.BtnPageLaunch.setObjectName("BtnPageLaunch")
 
         # 标题栏 Svg -- 标题
         self.SVGTitle = QSvgWidget(self.PanTitle)
@@ -87,15 +89,6 @@ class Ui_FormMain(object):
         self.SVGTitle.setGeometry(QtCore.QRect(8, 8, 120, 40))
         self.SVGTitle.setStyleSheet("background-color: transparent;")
         self.SVGTitle.setObjectName("SVGTitle")
-
-        # 添加页面到 QStackedWidget
-        self.page_launch = PageLaunch()
-        self.PanMain.addWidget(self.page_launch)
-        
-        # 如果有 PageDownload，也添加进来
-        from Pages.PageDownload.PageDownload import PageDownload
-        self.page_download = PageDownload()
-        self.PanMain.addWidget(self.page_download)
         
         # 默认显示第一个页面
         self.PanMain.setCurrentIndex(0)
