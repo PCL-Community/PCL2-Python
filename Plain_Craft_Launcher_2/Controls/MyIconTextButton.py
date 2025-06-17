@@ -5,6 +5,8 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor, QFontDatabase, QPainter, QPen, QBrush, QFont, QFontMetrics
 import os
 
+from Modules.Base.ModQtFont import ModQtFont
+
 
 class MyIconTextButton(QPushButton):
     """图标文本按钮
@@ -141,31 +143,7 @@ class MyIconTextButton(QPushButton):
             text: 文本内容
             font_size: 字体大小
         """
-        font = QFont()
-        
-        # 检查文本是否包含中文
-        if self.containsChinese(text):
-            # 中文字体路径
-            chinese_font_path = os.path.join("Resources", "Fonts", "FontChinese.ttc")
-            print(chinese_font_path)
-            print(os.path.exists(chinese_font_path))
-            if os.path.exists(chinese_font_path):
-                font_id = QFontDatabase.addApplicationFont(chinese_font_path)
-                font_name = QFontDatabase.applicationFontFamilies(font_id)[0]
-                font.setFamily(font_name)
-            else:
-                raise FileNotFoundError("无法找到字体文件")
-        else:
-            # 英文字体路径
-            english_font_path = os.path.join("Resources", "Fonts", "Font.ttf")
-            print(english_font_path)
-            print(os.path.exists(english_font_path))
-            if os.path.exists(english_font_path):
-                font_id = QFontDatabase.addApplicationFont(english_font_path)
-                font_name = QFontDatabase.applicationFontFamilies(font_id)[0]
-                font.setFamily(font_name)
-            else:
-                raise FileNotFoundError("无法找到字体文件")
+        font = ModQtFont.get_font_object(text)
                 
         font.setPointSize(font_size)
         self.text_label.setFont(font)
