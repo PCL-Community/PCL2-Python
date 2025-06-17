@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# 不许做单例模式！！！！！！！！！！！！！！！
 from PyQt5.QtWidgets import QStackedWidget
 
 from Modules.Base.ModLogging import ModLogging, LoggingType as LT
