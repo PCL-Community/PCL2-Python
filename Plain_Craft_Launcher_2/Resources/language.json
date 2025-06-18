@@ -1,12 +1,28 @@
 {
     "zh-CN": {
-        "application": {
-            "error": "锟斤拷烫烫烫"
+        "Application": {
+            "Error": "锟斤拷烫烫烫"
+        },
+        "PanTitle": {
+            "Pages": {
+                "Launch": "启动",
+                "Download": "下载",
+                "Settings": "设置",
+                "Other": "更多"
+            }
         }
     }, 
     "en-US": {
-        "application": {
-            "error": "An error occured when loading the application."
+        "Application": {
+            "Error": "An error occured when loading the application."
+        },
+        "PanTitle": {
+            "Pages": {
+                "Launch": "Launch",
+                "Download": "Download",
+                "Settings": "Settings",
+                "Other": "Other"
+            }
         }
     }
 }

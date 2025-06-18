@@ -18,9 +18,9 @@ class MyIconTextButton(QPushButton):
                  svg_size=(24, 24),
                  border_width=1, border_color=QColor(255, 255, 255, 0),
                  svg_color=QColor(255, 255, 255, 255),
-                 text_color=QColor(0, 0, 0, 255),
-                 font_size=12,
-                 margin=(8, 0, 8, 0),
+                 text_color=QColor(255, 255, 255, 255),
+                 font_size=10,
+                 margin=(16, 0, 16, 0),
                  padding=(4, 0, 4, 0),
                  command=None):
         """
@@ -36,8 +36,8 @@ class MyIconTextButton(QPushButton):
             border_width: 边框宽度，默认为 1
             border_color: 边框颜色，默认为透明
             svg_color: SVG 图标颜色，默认为白色
-            text_color: 文本颜色，默认为黑色
-            font_size: 文本字体大小，默认为 12
+            text_color: 文本颜色，默认为白色
+            font_size: 文本字体大小，默认为 10
             margin: 按钮内容外边距，格式为 (左, 上, 右, 下)，默认为 (8, 0, 8, 0)
             padding: 图标与文本之间的间距，格式为 (左, 上, 右, 下)，默认为 (4, 0, 4, 0)
             command: 按下按钮时执行的函数

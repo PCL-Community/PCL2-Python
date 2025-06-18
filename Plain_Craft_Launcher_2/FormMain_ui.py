@@ -2,7 +2,8 @@
 """FormMain 的 Ui 实现部分
 备注：
 1. 不需要最大化按钮
-2. 按钮的绑定在 FormMain 中"""
+2. 按钮的绑定在 FormMain 中
+3. 窗口的边框拖动处理在 RoundShadow 中"""
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtSvg import QSvgWidget
@@ -12,7 +13,9 @@ from Controls.MyRoundButton import MyRoundButton
 from Controls.MyIconTextButton import MyIconTextButton
 from Modules.Base.ModSetup import ModSetup as Setup
 from Modules.Base.ModPage import ModPagePanMain
+from Modules.Base.ModLanguage import ModLanguage
 
+lang = ModLanguage()
 
 
 class Ui_FormMain(object):
@@ -64,23 +67,23 @@ class Ui_FormMain(object):
 
         # 标题栏按钮 -- 退出
         self.BtnExit = MyRoundButton(self.PanTitle, svg_path="Images/BtnTitleExit.svg", size=(36, 36), tooltip="Exit")
-        self.BtnExit.setGeometry(QtCore.QRect((size[0] - 16), 8, 36, 36))
+        self.BtnExit.setGeometry(QtCore.QRect(size[0], 8, 36, 36))
         self.BtnExit.setObjectName("BtnExit")
 
         # 标题栏按钮 -- 最小化
         self.BtnMin = MyRoundButton(self.PanTitle, svg_path="Images/BtnTitleMin.svg", size=(36, 36), tooltip="Minisize")
-        self.BtnMin.setGeometry(QtCore.QRect((size[0] - 64), 8, 36, 36))
+        self.BtnMin.setGeometry(QtCore.QRect(size[0], 8, 36, 36))
         self.BtnMin.setObjectName("BtnMin")
 
         # 标题栏按钮 -- 切换到下载页面
         self.BtnPageDownload = MyIconTextButton(self.PanTitle, svg_path="Images/BtnTitlePageDownload.svg",
-                                              text="Download", command=lambda: self.page_manager.switch_page(1))
-        self.BtnPageDownload.setGeometry(QtCore.QRect(600, 8, 0, 0))                                
+                                              text=lang.get_text("PanTitle.Pages.Download"), command=lambda: self.page_manager.switch_page(1))
+        self.BtnPageDownload.setGeometry(QtCore.QRect(420, 8, 0, 0))                                
         self.BtnPageDownload.setObjectName("BtnPageDownload")
         # 标题栏按钮 -- 切换到启动页面
         self.BtnPageLaunch = MyIconTextButton(self.PanTitle, svg_path="Images/BtnTitlePageLaunch.svg",
-                                              text="Launch", command=lambda: self.page_manager.switch_page(0))
-        self.BtnPageLaunch.setGeometry(QtCore.QRect(420, 8, 0, 0))                                
+                                              text=lang.get_text("PanTitle.Pages.Launch"), command=lambda: self.page_manager.switch_page(0))
+        self.BtnPageLaunch.setGeometry(QtCore.QRect(300, 8, 0, 0))                                
         self.BtnPageLaunch.setObjectName("BtnPageLaunch")
 
         # 标题栏 Svg -- 标题
