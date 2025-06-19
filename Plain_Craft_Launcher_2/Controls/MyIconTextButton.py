@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-from PyQt5.QtWidgets import QPushButton, QLabel, QHBoxLayout
+from PyQt5.QtWidgets import QPushButton, QLabel, QHBoxLayout, QWidget
 from PyQt5.QtSvg import QSvgWidget
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QColor, QFontDatabase, QPainter, QPen, QBrush, QFont, QFontMetrics
-import os
+from PyQt5.QtGui import QColor, QPainter, QPen, QBrush, QFontMetrics
+import os, re
 
 from Modules.Base.ModQtFont import ModQtFont
 
@@ -52,6 +52,8 @@ class MyIconTextButton(QPushButton):
         self._margin = margin
         self._padding = padding
         self._svg_size = svg_size
+        self._text_color = text_color
+        self._svg_color = svg_color
 
         # 设置按钮属性
         self.setToolTip(tooltip)
@@ -116,8 +118,8 @@ class MyIconTextButton(QPushButton):
 
         # 设置背景颜色（默认透明）
         self.bg_color = QColor(255, 255, 255, 0)
-        self.hover_color = QColor(255, 255, 255, 127)
-        self.press_color = QColor(255, 255, 255, 127)
+        self.hover_color = QColor(255, 255, 255, 44)
+        self.press_color = QColor(255, 255, 255, 255)
         
         # 计算并设置按钮宽度
         self.updateButtonSize()
@@ -173,9 +175,28 @@ class MyIconTextButton(QPushButton):
         """
         if isinstance(color, str):
             color = QColor(color)
-
-        # 通过样式表设置 SVG 颜色
-        self.svg_widget.setStyleSheet(f"background-color: transparent; color: {color.name()};")
+        
+        # 获取当前加载的 SVG 路径
+        svg_path = self.svg_widget.load
+        if not svg_path:
+            return
+        
+        # 读取 SVG 文件内容
+        with open(svg_path, 'r', encoding='utf-8') as file:
+            svg_content = file.read()
+        
+        # 使用正则表达式替换 fill="currentColor" 和 stroke="currentColor"
+        import re
+        svg_content = re.sub(r'fill="currentColor"', f'fill="{color.name()}"', svg_content)
+        svg_content = re.sub(r'stroke="currentColor"', f'stroke="{color.name()}"', svg_content)
+        
+        # 使用 QByteArray 和 QSvgRenderer 加载修改后的 SVG
+        from PyQt5.QtCore import QByteArray
+        from PyQt5.QtSvg import QSvgRenderer
+        
+        byte_array = QByteArray(svg_content.encode('utf-8'))
+        renderer = QSvgRenderer(byte_array)
+        self.svg_widget.setRenderer(renderer)
 
     def setTextColor(self, color):
         """设置文本颜色
@@ -296,16 +317,23 @@ class MyIconTextButton(QPushButton):
             # 按下状态
             bg_color = self.press_color
             border_color = QColor(self.border_color)
-            border_color.setAlpha(127)
+            border_color.setAlpha(255)  # 按下时边框不透明
+            transparent_color = self.get_background_color(self.parentWidget())
+            self.setTextColor(transparent_color)
+            self.setSvgColor(transparent_color)
         elif self.is_hovered:
             # 悬停状态
             bg_color = self.hover_color
             border_color = QColor(self.border_color)
             border_color.setAlpha(0)  # 悬停时边框透明
+            self.setTextColor(self._text_color)
+            self.setSvgColor(self._svg_color)
         else:
             # 正常状态
             bg_color = self.bg_color
             border_color = QColor(self.border_color)
+            self.setTextColor(self._text_color)
+            self.setSvgColor(self._svg_color)
 
         # 绘制背景
         painter.setBrush(QBrush(bg_color))
@@ -354,3 +382,31 @@ class MyIconTextButton(QPushButton):
             color = QColor(color)
         self.bg_color = color
         self.update()  # 触发重绘
+
+    @staticmethod
+    def get_background_color(widget: QWidget) -> QColor:
+        """获取控件的背景颜色
+
+        Args:
+            widget: 控件对象
+
+        Returns:
+            背景颜色，QColor 对象
+        """
+        # 获取样式表
+        stylesheet = widget.styleSheet()
+        
+        # 正则匹配 background-color 属性
+        pattern = re.compile(r"background-color:\s*([^;]+)")
+        match = pattern.search(stylesheet)
+        
+        if match:
+            color_str = match.group(1)
+            # 去除可能存在的空格和引号
+            color_str = color_str.strip().strip("'\"")
+            if color_str.startswith("qlineargradient"):
+                # 如果是渐变色，则返回 Stop 0 的颜色
+                color_str = color_str.split("stop:0")[1].split(",")[0].strip()
+            color_obj = QColor(color_str)
+            return color_obj
+        return None
