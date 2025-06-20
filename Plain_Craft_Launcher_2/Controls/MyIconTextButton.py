@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 from PyQt5.QtWidgets import QPushButton, QLabel, QHBoxLayout, QWidget
-from PyQt5.QtSvg import QSvgWidget
+from PyQt5.QtSvg import QSvgWidget, QSvgRenderer
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QColor, QPainter, QPen, QBrush, QFontMetrics
+from PyQt5.QtGui import QColor, QPainter, QPen, QBrush, QFontMetrics, QPixmap
 import os, re
+
+from Modules.Base.ModLogging import ModLogging, LoggingType as LT
 
 from Modules.Base.ModQtFont import ModQtFont
 
@@ -44,6 +46,7 @@ class MyIconTextButton(QPushButton):
 
         """
         super().__init__(parent)
+        self.logger = ModLogging(module_name='MyIconTextButton')
 
         # 保存参数
         self.button_height = height
@@ -52,6 +55,7 @@ class MyIconTextButton(QPushButton):
         self._margin = margin
         self._padding = padding
         self._svg_size = svg_size
+        self._svg_path = svg_path
         self._text_color = text_color
         self._svg_color = svg_color
 
@@ -177,15 +181,13 @@ class MyIconTextButton(QPushButton):
             color = QColor(color)
         
         # 获取当前加载的 SVG 路径
-        svg_path = self.svg_widget.load
-        if not svg_path:
-            return
+        svg_path = self._svg_path
         
         # 读取 SVG 文件内容
         with open(svg_path, 'r', encoding='utf-8') as file:
             svg_content = file.read()
         
-        # 使用正则表达式替换 fill="currentColor" 和 stroke="currentColor"
+        # 替换 currentColor 为具体的颜色值
         import re
         svg_content = re.sub(r'fill="currentColor"', f'fill="{color.name()}"', svg_content)
         svg_content = re.sub(r'stroke="currentColor"', f'stroke="{color.name()}"', svg_content)
@@ -196,8 +198,9 @@ class MyIconTextButton(QPushButton):
         
         byte_array = QByteArray(svg_content.encode('utf-8'))
         renderer = QSvgRenderer(byte_array)
-        self.svg_widget.setRenderer(renderer)
+        self.svg_widget.renderer().load(byte_array)
 
+        
     def setTextColor(self, color):
         """设置文本颜色
         
@@ -307,6 +310,8 @@ class MyIconTextButton(QPushButton):
     def paintEvent(self, event):
         """重写绘制事件，添加两端圆角矩形边框和背景"""
         # 不调用父类的绘制方法，完全自定义绘制
+
+#       self.logger.write("已触发重绘。", LT.INFO)
 
         # 创建画笔
         painter = QPainter(self)
