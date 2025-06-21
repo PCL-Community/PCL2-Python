@@ -14,7 +14,7 @@ class ModLanguage:
         else:
             return "en-US"
 
-    def get_text(self, key: str, lang: str = "zh-CN") -> str:
+    def get_text(self, key: str) -> str:
         temp = deepcopy(self._lang)
         for key_item in key.split("."):
             temp = temp[key_item]

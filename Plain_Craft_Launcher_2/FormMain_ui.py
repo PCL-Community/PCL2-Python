@@ -7,7 +7,6 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtSvg import QSvgWidget
-from PyQt5.QtCore import Qt
 
 from Controls.MyRoundButton import MyRoundButton
 from Controls.MyIconTextButton import MyIconTextButton

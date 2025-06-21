@@ -3,6 +3,7 @@ from PyQt5 import QtCore
 
 from Modules.Base.ModSetup import ModSetup as Setup
 from Modules.Base.ModLogging import ModLogging, LoggingType as LT
+from Controls.MyCard import MyCard
 
 setup = Setup()
 
@@ -33,3 +34,6 @@ class PageDownload(QWidget):
 #       self.PanLeft = PageLaunchLeft(self)
 #       self.PanLeft.setGeometry(
 #           QtCore.QRect(0, 0, 300, (setup.get_settings("size")[1] - setup.get_settings("title_height"))))
+        self.card = MyCard(self, title_text="下载", size=(200, 300), margin=(8, 8, 8, 8), can_fold=True, objectName="CardDownload")
+
+        

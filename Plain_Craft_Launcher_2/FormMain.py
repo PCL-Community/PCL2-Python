@@ -46,9 +46,7 @@ class FormMain(RoundShadow):
         # 连接按钮事件
         self.ui.BtnExit.clicked.connect(self.close_window)
         self.ui.BtnMin.clicked.connect(self.minimize_window)
-        
-        # 记录窗口是否最大化
-        self.is_maximized = False
+
         # 记录窗口正常状态下的位置和大小
         self.normal_geometry = self.geometry()
         
@@ -118,22 +116,5 @@ class FormMain(RoundShadow):
         self.logger.write("按下按钮：BtnMin，正在尝试最小化窗口", LT.INFO)
         self.showMinimized()
     
-    def toggle_maximize_window(self):
-        """切换窗口最大化/还原状态"""
-        if self.isMaximized():
-            self.restore_window()
-        else:
-            self.maximize_window()
-    
-    def maximize_window(self):
-        """跨平台最大化窗口"""
-        self.logger.write("按下按钮：BtnMax，正在尝试最大化窗口", LT.INFO)
-        # 保存当前窗口位置和大小（如果需要）
-        self.showMaximized()
-    
-    def restore_window(self):
-        """跨平台还原窗口"""
-        self.logger.write("按下按钮：BtnMax，正在尝试还原窗口", LT.INFO)
-        self.showNormal()
 
 

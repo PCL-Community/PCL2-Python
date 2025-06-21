@@ -255,12 +255,12 @@ class MyRoundButton(QPushButton):
         # 根据状态设置背景颜色
         if self.is_pressed:
             # 按下状态 - 50% 透明度
-            bg_color = QColor(255, 255, 255, 127)
+            bg_color = QColor(255, 255, 255, 44)
             border_color = QColor(self.border_color)
             border_color.setAlpha(127)
         elif self.is_hovered:
             # 悬停状态 - 50% 透明度
-            bg_color = QColor(255, 255, 255, 127)
+            bg_color = QColor(255, 255, 255, 44)
             border_color = QColor(self.border_color)
             # border_color.setAlpha(127) 这里边框做成全透明更好看
             border_color.setAlpha(0)
