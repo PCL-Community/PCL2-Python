@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QWidget, QLabel
+from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout
 from PyQt5.QtCore import Qt, QRect, QPropertyAnimation, QEasingCurve
 from PyQt5.QtGui import QPixmap, QColor
 from Modules.Base.ModQtFont import ModQtFont
@@ -29,12 +29,26 @@ class MyCard(QWidget):
 
         
         # 设置样式
-        self.setStyleSheet(f"QWidget #{self.objectName} {{background-color: #FFFFFF; border-radius: 8px;}}")
+        self.setStyleSheet(f"""
+            QWidget #{self.objectName} {{
+                background-color: rgba(255, 255, 255, 0.95);
+                border-radius: 8px;
+                border: 1px solid rgba(255, 255, 255, 0.3);
+            }}
+        """)
         
         # 标题相关
         self._title_text = title_text
         self.title_label = QLabel(self, text=title_text)
-        self.title_label.setStyleSheet("QLabel {font-size: 16px;font-weight: bold;color: #000000;background-color: transparent;}")
+        self.title_label.setStyleSheet("""
+            QLabel {
+                font-size: 16px;
+                font-weight: bold;
+                color: #343d4a;
+                background-color: transparent;
+                padding: 4px;
+            }
+        """)
         self.title_label.setFont(self.font_manager.get_font_object(title_text))
         self.title_label.move(margin[0], margin[1])
         
@@ -50,6 +64,7 @@ class MyCard(QWidget):
         self.animation = QPropertyAnimation(self, b"size")
         self.animation.setDuration(300)  # 动画持续时间300毫秒
         self.animation.setEasingCurve(QEasingCurve.OutCubic)  # 设置缓动曲线
+        self.animation.finished.connect(self._on_animation_finished)
     
     def toggle_fold(self):
         """切换折叠/展开状态"""
@@ -72,19 +87,18 @@ class MyCard(QWidget):
         self.animation.setStartValue(self.size())
         self.animation.setEndValue(QRect(0, 0, *self._folded_size).size())
         
-        # 更新按钮文本
+        # 更新按钮图标
         self.btn_fold_toggle.setSvgPath("Images/BtnCardToggleCollapsed.svg")
+        
+        # 隐藏内容区域
+        if hasattr(self, 'content_widget'):
+            self.content_widget.hide()
         
         # 开始动画
         self.animation.start()
         
         # 更新状态
         self.status = "folded"
-        
-        # 隐藏子控件（除了标题和折叠按钮）
-        for child in self.children():
-            if child != self.title_label and child != self.btn_fold_toggle:
-                child.hide()
     
     def unfold(self):
         """展开卡片"""
@@ -95,24 +109,73 @@ class MyCard(QWidget):
         self.animation.setStartValue(self.size())
         self.animation.setEndValue(QRect(0, 0, *self._original_size).size())
         
-        # 更新按钮文本
-        self.btn_fold_toggle.setText("↑")
+        # 更新按钮图标
+        self.btn_fold_toggle.setSvgPath("Images/BtnCardToggleNormal.svg")
+        
+        # 显示内容区域
+        if hasattr(self, 'content_widget'):
+            self.content_widget.show()
         
         # 开始动画
         self.animation.start()
         
         # 更新状态
         self.status = "normal"
+    
+    def setContentLayout(self, layout):
+        """设置卡片内容布局"""
+        # 创建一个容器widget来承载内容布局
+        self.content_widget = QWidget(self)
+        self.content_widget.setLayout(layout)
         
-        # 显示之前隐藏的子控件
-        for child in self.children():
-            child.show()
+        # 设置内容widget的位置和大小
+        # 考虑标题栏的高度和边距
+        title_height = 40  # 标题栏高度
+        margin = 8  # 边距
+        self.content_widget.setGeometry(
+            margin,
+            title_height + margin,
+            self.width() - 2 * margin,
+            self.height() - title_height - 2 * margin
+        )
+        
+        # 如果当前是折叠状态，隐藏内容
+        if self.status == "folded":
+            self.content_widget.hide()
+        
+        # 如果当前是折叠状态，则展开
+        if self.status == "folded":
+            self.unfold()
+    
+    def _on_animation_finished(self):
+        """动画完成时的回调函数"""
+        if hasattr(self, 'content_widget'):
+            if self.status == "normal":
+                self.content_widget.show()
+                self._update_content_geometry()
+            else:
+                self.content_widget.hide()
+    
+    def _update_content_geometry(self):
+        """更新内容区域的大小和位置"""
+        if hasattr(self, 'content_widget'):
+            title_height = 40  # 标题栏高度
+            margin = 8  # 边距
+            self.content_widget.setGeometry(
+                margin,
+                title_height + margin,
+                self.width() - 2 * margin,
+                self.height() - title_height - 2 * margin
+            )
     
     def resizeEvent(self, event):
-        """重写大小调整事件，确保按钮始终在右上角"""
+        """重写大小调整事件，确保按钮始终在右上角并更新内容布局"""
         super().resizeEvent(event)
         
         if hasattr(self, 'btn_fold_toggle'):
             # 更新按钮位置到右上角
             self.btn_fold_toggle.move(self.width() - self.btn_fold_toggle.width() - 8, 8)
+        
+        # 更新内容布局的大小
+        self._update_content_geometry()
         

@@ -2,6 +2,7 @@
 .idea/
 .vs/
 .vscode/
+Plain_Craft_Launcher_2/data/
 
 # Python Environment & Cache
 **/*venv*/

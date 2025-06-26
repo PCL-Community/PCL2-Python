@@ -22,6 +22,14 @@ class FormMain(RoundShadow):
         # 初始化日志
         self.logger = ModLogging(module_name="FormMain")
         
+        # 加载设置
+        self.setup = Setup()
+        
+        # 设置日志级别
+        saved_level = getattr(LT, self.setup.log_level.upper())
+        ModLogging.set_log_level(saved_level)
+        self.logger.write(f'日志级别设置为：{self.setup.log_level}', LT.INFO, '初始化', '完成')
+        
         # 设置窗口标志，确保最小化时显示在任务栏
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.Window | Qt.WindowSystemMenuHint | Qt.WindowMinimizeButtonHint)
         

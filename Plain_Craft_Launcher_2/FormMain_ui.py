@@ -74,16 +74,23 @@ class Ui_FormMain(object):
         self.BtnMin.setGeometry(QtCore.QRect(size[0], 8, 36, 36))
         self.BtnMin.setObjectName("BtnMin")
 
-        # 标题栏按钮 -- 切换到下载页面
-        self.BtnPageDownload = MyIconTextButton(self.PanTitle, svg_path="Images/BtnTitlePageDownload.svg",
-                                              text=lang.get_text("PanTitle.Pages.Download"), command=lambda: self.page_manager.switch_page(1))
-        self.BtnPageDownload.setGeometry(QtCore.QRect(420, 8, 0, 0))                                
-        self.BtnPageDownload.setObjectName("BtnPageDownload")
         # 标题栏按钮 -- 切换到启动页面
         self.BtnPageLaunch = MyIconTextButton(self.PanTitle, svg_path="Images/BtnTitlePageLaunch.svg",
                                               text=lang.get_text("PanTitle.Pages.Launch"), command=lambda: self.page_manager.switch_page(0))
         self.BtnPageLaunch.setGeometry(QtCore.QRect(300, 8, 0, 0))                                
         self.BtnPageLaunch.setObjectName("BtnPageLaunch")
+
+        # 标题栏按钮 -- 切换到下载页面
+        self.BtnPageDownload = MyIconTextButton(self.PanTitle, svg_path="Images/BtnTitlePageDownload.svg",
+                                              text=lang.get_text("PanTitle.Pages.Download"), command=lambda: self.page_manager.switch_page(1))
+        self.BtnPageDownload.setGeometry(QtCore.QRect(420, 8, 0, 0))                                
+        self.BtnPageDownload.setObjectName("BtnPageDownload")
+
+        # 标题栏按钮 -- 切换到设置页面
+        self.BtnPageSettings = MyIconTextButton(self.PanTitle, svg_path="Images/BtnTitlePageSettings.svg",
+                                              text="设置", command=lambda: self.page_manager.switch_page(2))
+        self.BtnPageSettings.setGeometry(QtCore.QRect(540, 8, 0, 0))                                
+        self.BtnPageSettings.setObjectName("BtnPageSettings")
 
         # 标题栏 Svg -- 标题
         self.SVGTitle = QSvgWidget(self.PanTitle)

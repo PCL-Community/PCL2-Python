@@ -40,6 +40,25 @@ class LoggingType(Enum):
 
 
 class ModLogging():
+    # 类级别的日志级别设置
+    _log_level = LoggingType.INFO
+
+    @classmethod
+    def set_log_level(cls, level: LoggingType):
+        """设置全局日志级别"""
+        cls._log_level = level
+
+    @classmethod
+    def get_log_level(cls) -> LoggingType:
+        """获取当前日志级别"""
+        return cls._log_level
+
+    @staticmethod
+    def _get_level_value(level: LoggingType) -> int:
+        """获取日志级别的数值"""
+        level_values = {'Info': 0, 'Warn': 1, 'Error': 2, 'Fatal': 3}
+        return level_values[str(level)]
+
     def __init__(
             self,
             module_name: str | None = 'Logging',
@@ -89,6 +108,10 @@ class ModLogging():
             status: str - 执行状态（可选，默认为"正常"）
         '''
         try:
+            # 检查是否需要记录此级别的日志
+            if self._get_level_value(log_level) < self._get_level_value(self._log_level):
+                return
+
             # 获取调用栈信息来确定代码位置
             import inspect
             caller_frame = inspect.currentframe().f_back

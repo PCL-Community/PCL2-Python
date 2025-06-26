@@ -4,8 +4,9 @@ from PyQt5.QtWidgets import QStackedWidget
 from Modules.Base.ModLogging import ModLogging, LoggingType as LT
 from Pages.PageLaunch.PageLaunch import PageLaunch
 from Pages.PageDownload.PageDownload import PageDownload
+from Pages.PageSettings.PageSettings import PageSettings
 
-PAGES = (PageLaunch, PageDownload)
+PAGES = (PageLaunch, PageDownload, PageSettings)
 
 
 class ModPage:

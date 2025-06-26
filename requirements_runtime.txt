@@ -1,0 +1,12 @@
+certifi==2025.4.26
+cffi==1.17.1
+charset-normalizer==3.4.2
+cryptography==44.0.3
+idna==3.10
+minecraft-launcher-lib
+msal==1.32.3
+pycparser==2.22
+PyQt5==5.15.11
+PyQt5_sip==12.17.0
+requests==2.32.4
+urllib3==2.4.0
