@@ -75,38 +75,42 @@ class ModLogging():
     def write(
             self,
             message: str,
-            log_level: LoggingType
+            log_level: LoggingType,
+            action: str = "",
+            status: str = "正常"
     ) -> None:
         r'''
         Writing A Log Into File
         
-        1. Initializaing With Args:
-        ---------------------------------
-        message : str  # Message want to log
-        log_level: str | None = 'INFO' # Log Level
-        
-        2. Return:
-        ---------------
-        None
+        Args:
+            message: str - 程序发生了什么
+            log_level: LoggingType - 日志级别
+            action: str - 干了什么动作（可选）
+            status: str - 执行状态（可选，默认为"正常"）
         '''
         try:
-            space_map = {
-                'Info': '  ',
-                'Warn': '  ',
-                'Error': ' ',
-                'Fatal': ' '
-            }
-            log_level_str = str(log_level)
+            # 获取调用栈信息来确定代码位置
+            import inspect
+            caller_frame = inspect.currentframe().f_back
+            code_location = f"{caller_frame.f_code.co_filename}:{caller_frame.f_lineno}"
+            
+            # 格式化日志内容：级别+代码位置+时间+干了什么+程序发生了什么+状态
+            action_str = f"[{action}] " if action else ""
+            log_content = f"[{log_level}] [{code_location}] [{now()}] {action_str}{message} (状态：{status})"
+            
+            # 写入文件
             with open(f'{launcher_data_folder}/Log1.log', 'a', encoding='utf-8') as f:
-                f.write(f'[{log_level_str}]{space_map[log_level_str]}[{self.module_name}] {now()} > {message}\n')
+                f.write(log_content + '\n')
+            
+            # 控制台输出带颜色
             color_map = {
                 'Info': green,
                 'Warn': yellow,
                 'Error': red,
                 'Fatal': red
             }
-            print(
-                f'{color_map[log_level_str]}[{log_level_str}]{clear}{space_map[log_level_str]}[{self.module_name}] {now()} > {message}')
+            print(f"{color_map[str(log_level)]}{log_content}{clear}")
+
         except Exception as ex:
             time = now()
             print(f'[{red}FATAL{clear}] [Logging] {time} > 记录日志时发生错误')

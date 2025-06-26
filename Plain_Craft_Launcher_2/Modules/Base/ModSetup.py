@@ -22,7 +22,7 @@ class ModSetup:
 
         self.logger = ModLogging(module_name="ModSetup")
         self.load_settings()
-        self.logger.write("ModSetup 加载完成", LT.INFO)
+        self.logger.write("设置模块初始化完成", LT.INFO, "初始化", "完成")
 
     def setup_settings(self):
         """初始化设置项"""
@@ -41,7 +41,7 @@ class ModSetup:
         self.size = (900, 550)
         self.title_height = 48
 
-        self.logger.write("设置初始化完成", LT.INFO)
+        self.logger.write("默认设置已创建", LT.INFO, "配置", "完成")
 
     def load_settings(self, file_path: str = "./data/Config.json"):
         """读取已经存储的设置"""
@@ -51,9 +51,9 @@ class ModSetup:
             for key, value in settings.items():
                 setattr(self, key, value)
 
-            self.logger.write("设置文件读取成功", LT.INFO)
+            self.logger.write("配置文件已读取", LT.INFO, "配置", "完成")
         except FileNotFoundError:
-            self.logger.write("设置文件未找到，进行初始化", LT.INFO)
+            self.logger.write("配置文件不存在", LT.INFO, "配置", "需要初始化")
             self.setup_settings()
 
     def save_settings(self, file_path: str = "./data/Config.json"):
@@ -62,7 +62,7 @@ class ModSetup:
         with open(file_path, "w") as f:
             json.dump(settings, f)
 
-        self.logger.write("设置文件保存成功", LT.INFO)
+        self.logger.write("配置已保存到文件", LT.INFO, "配置", "完成")
 
     def get_settings(self, setting: str):
         """获取设置"""

@@ -27,25 +27,25 @@ class ModPage:
         """
         # 检查页面索引是否有效
         if page_id < 0 or page_id >= stack_widget.count():
-            self.logger.write(f"页面索引 {page_id} 超出范围 (0-{stack_widget.count()-1})。", LT.ERROR)
+            self.logger.write(f"页面索引 {page_id} 超出范围 (0-{stack_widget.count()-1})", LT.ERROR, "页面切换", "参数错误")
             return False
             
         # 如果当前已经是该页面，则不做任何操作
         if stack_widget.currentIndex() == page_id:
-            self.logger.write(f"页面 {page_id} 已经是当前页面，无需切换", LT.INFO)
+            self.logger.write(f"页面 {page_id} 已是当前页面", LT.INFO, "页面切换", "无需操作")
             return True
             
         # 记录新页面索引
-        self.logger.write(f"正在切换到页面索引: {page_id}", LT.INFO)
+        self.logger.write(f"切换到页面 {page_id}", LT.INFO, "页面切换", "进行中")
         
         # 使用 QStackedWidget 的原生方法切换页面
         try:
             stack_widget.setCurrentIndex(page_id)
             self.current_page_index = page_id
-            self.logger.write(f"成功切换到页面索引: {page_id}", LT.INFO)
+            self.logger.write(f"页面 {page_id} 切换完成", LT.INFO, "页面切换", "完成")
             return True
         except Exception as e:
-            self.logger.write(f"切换到页面索引 {page_id} 时发生错误: {e}", LT.ERROR)
+            self.logger.write(f"切换到页面 {page_id} 失败: {e}", LT.ERROR, "页面切换", "异常")
             return False
 
 

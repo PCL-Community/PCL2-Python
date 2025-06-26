@@ -16,7 +16,7 @@ class PageLaunch(QWidget):
         super().__init__(parent)
 
         self.logger = ModLogging(module_name="PageLaunch")
-        self.logger.write("启动页加载中", LT.INFO)
+        self.logger.write("启动页面初始化", LT.INFO, "页面加载", "进行中")
 
         # 先设置objectName
         self.setObjectName("PageLaunch")

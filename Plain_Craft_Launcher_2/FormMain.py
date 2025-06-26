@@ -28,7 +28,7 @@ class FormMain(RoundShadow):
         # 窗口加载第一步：基础
         # 设置窗口大小
         self.resize(900, 550)
-        self.logger.write("窗口加载第一步完成", LT.INFO)
+        self.logger.write("窗口基础设置完成", LT.INFO, "初始化", "完成")
         
         # 窗口加载第二步：加载 UI 控件
         # 创建一个容器widget
@@ -40,7 +40,7 @@ class FormMain(RoundShadow):
         self.ui.setupUi(self.container)
         
 
-        self.logger.write("窗口加载第二步完成", LT.INFO)
+        self.logger.write("UI控件加载完成", LT.INFO, "初始化", "完成")
 
         # 窗口加载第三步：链接信号/槽（真的不用设置无边框）
         # 连接按钮事件
@@ -59,9 +59,9 @@ class FormMain(RoundShadow):
         self.ui.PanTitle.mouseMoveEvent = self.PanTitle_mouseMoveEvent
         self.ui.PanTitle.mouseReleaseEvent = self.PanTitle_mouseReleaseEvent
 
-        self.logger.write("窗口加载第三步完成", LT.INFO)
+        self.logger.write("窗口样式设置完成", LT.INFO, "初始化", "完成")
 
-        self.logger.write("FormMain 加载完成", LT.INFO)
+        self.logger.write("主窗口初始化完成", LT.INFO, "初始化", "完成")
 
     def PanTitle_mousePressEvent(self, event):
         """处理标题栏鼠标按下事件"""
@@ -99,21 +99,21 @@ class FormMain(RoundShadow):
     def close_window(self):
         """处理窗口关闭（对应的信号：BtnExit.clicked）"""
 
-        self.logger.write("按下按钮：BtnExit，正在尝试关闭窗口", LT.INFO)
+        self.logger.write("用户点击关闭按钮", LT.INFO, "窗口操作", "进行中")
 
         try:
             self.close()  # 这会触发QWidget的close事件
             QApplication.processEvents()  # 确保所有待处理的事件都被处理
             QApplication.quit()  # 完全退出应用
         except Exception as e:
-            self.logger.write(f"关闭窗口时发生错误：{e}，尝试强制结束程序", LT.ERROR)
+            self.logger.write(f"关闭窗口失败：{e}", LT.ERROR, "窗口操作", "异常")
             sys.exit(1)  # 强制结束程序
         finally:
-            self.logger.write("窗口关闭", LT.INFO)
+            self.logger.write("窗口已关闭", LT.INFO, "窗口操作", "完成")
 
     def minimize_window(self):
         """跨平台最小化窗口"""
-        self.logger.write("按下按钮：BtnMin，正在尝试最小化窗口", LT.INFO)
+        self.logger.write("用户点击最小化按钮", LT.INFO, "窗口操作", "进行中")
         self.showMinimized()
     
 

@@ -15,7 +15,7 @@ class PageDownload(QWidget):
         super().__init__(parent)
 
         self.logger = ModLogging(module_name="PageDownload")
-        self.logger.write("加载中", LT.INFO)
+        self.logger.write("下载页面初始化", LT.INFO, "页面加载", "进行中")
 
         # 先设置objectName
         self.setObjectName("PageDownload")
