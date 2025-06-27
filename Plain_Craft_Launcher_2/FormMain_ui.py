@@ -10,6 +10,7 @@ from PyQt5.QtSvg import QSvgWidget
 
 from Controls.MyRoundButton import MyRoundButton
 from Controls.MyIconTextButton import MyIconTextButton
+from Controls.MyRadioButton import MyRadioButton
 from Modules.Base.ModSetup import ModSetup as Setup
 from Modules.Base.ModPage import ModPagePanMain
 from Modules.Base.ModLanguage import ModLanguage
@@ -75,7 +76,7 @@ class Ui_FormMain(object):
         self.BtnMin.setObjectName("BtnMin")
 
         # 标题栏按钮 -- 切换到下载页面
-        self.BtnPageDownload = MyIconTextButton(self.PanTitle, svg_path="Images/BtnTitlePageDownload.svg",
+        self.BtnPageDownload = MyRadioButton(self.PanTitle, svg_path="Images/BtnTitlePageDownload.svg",
                                               text=lang.get_text("PanTitle.Pages.Download"), command=lambda: self.page_manager.switch_page(1))
         self.BtnPageDownload.setGeometry(QtCore.QRect(420, 8, 0, 0))                                
         self.BtnPageDownload.setObjectName("BtnPageDownload")

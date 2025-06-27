@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
-from PyQt5.QtWidgets import QPushButton
-from PyQt5.QtSvg import QSvgWidget
-from PyQt5.QtCore import Qt, QSize, QPropertyAnimation, QEasingCurve, QRect
+from PyQt5.QtWidgets import QPushButton, QWidget
+from PyQt5.QtSvg import QSvgWidget, QSvgRenderer
+from PyQt5.QtCore import Qt, QByteArray, QPropertyAnimation, QEasingCurve, QRect
 from PyQt5.QtGui import QColor, QPainter, QPen, QBrush
+
+import os, re
 
 class MyRoundButton(QPushButton):
     """圆形 SVG 图标按钮
@@ -65,6 +67,8 @@ class MyRoundButton(QPushButton):
         if svg_size is None:
             svg_size = (size[0] - 8, size[1] - 8)
         self.svg_size = svg_size
+        self.svg_path = svg_path
+        self.svg_color = svg_color
         self.margin = margin  # 设置外边距 (左, 上, 右, 下)
         self.padding = padding  # 设置内边距 (左, 上, 右, 下)
         self.centerSvg()  # 居中 SVG 图标
@@ -176,9 +180,21 @@ class MyRoundButton(QPushButton):
         """
         if isinstance(color, str):
             color = QColor(color)
-            
-        # 通过样式表设置 SVG 颜色
-        self.svg_widget.setStyleSheet(f"background-color: transparent; color: {color.name()};")
+        
+        # 获取当前加载的 SVG 路径
+        svg_path = self.svg_path
+        
+        # 读取 SVG 文件内容
+        with open(svg_path, 'r', encoding='utf-8') as file:
+            svg_content = file.read()
+        
+        # 替换 currentColor 为具体的颜色值
+        svg_content = re.sub(r'fill=".*?"', f'fill="{color.name()}"', svg_content)
+        svg_content = re.sub(r'stroke=".*?"', f'stroke="{color.name()}"', svg_content)
+        
+        byte_array = QByteArray(svg_content.encode('utf-8'))
+        renderer = QSvgRenderer(byte_array)
+        self.svg_widget.renderer().load(byte_array)
         
     def setSvgPath(self, svg_path):
         """更新 SVG 图标
@@ -254,20 +270,21 @@ class MyRoundButton(QPushButton):
         
         # 根据状态设置背景颜色
         if self.is_pressed:
-            # 按下状态 - 50% 透明度
-            bg_color = QColor(255, 255, 255, 44)
+            bg_color = QColor(255, 255, 255, 255)
             border_color = QColor(self.border_color)
-            border_color.setAlpha(127)
-        elif self.is_hovered:
-            # 悬停状态 - 50% 透明度
-            bg_color = QColor(255, 255, 255, 44)
-            border_color = QColor(self.border_color)
-            # border_color.setAlpha(127) 这里边框做成全透明更好看
             border_color.setAlpha(0)
+            transparent_color = self.get_background_color(self.parentWidget())
+            self.setSvgColor(transparent_color)
+        elif self.is_hovered:
+            bg_color = QColor(255, 255, 255, 44)
+            border_color = QColor(self.border_color)
+            border_color.setAlpha(0)
+            self.setSvgColor(self.svg_color)
         else:
             # 正常状态 - 完全透明
             bg_color = QColor(255, 255, 255, 0)
             border_color = QColor(self.border_color)
+            self.setSvgColor(self.svg_color)
         
         # 绘制背景
         painter.setBrush(QBrush(bg_color))
@@ -360,3 +377,31 @@ class MyRoundButton(QPushButton):
         self.animation.setStartValue(current_rect)
         self.animation.setEndValue(QRect(orig_x, orig_y, orig_width, orig_height))
         self.animation.start()
+
+    @staticmethod
+    def get_background_color(widget: QWidget) -> QColor:
+        """获取控件的背景颜色
+
+        Args:
+            widget: 控件对象
+
+        Returns:
+            背景颜色，QColor 对象
+        """
+        # 获取样式表
+        stylesheet = widget.styleSheet()
+        
+        # 正则匹配 background-color 属性
+        pattern = re.compile(r"background-color:\s*([^;]+)")
+        match = pattern.search(stylesheet)
+        
+        if match:
+            color_str = match.group(1)
+            # 去除可能存在的空格和引号
+            color_str = color_str.strip().strip("'\"")
+            if color_str.startswith("qlineargradient"):
+                # 如果是渐变色，则返回 Stop 0 的颜色
+                color_str = color_str.split("stop:0")[1].split(",")[0].strip()
+            color_obj = QColor(color_str)
+            return color_obj
+        return None

@@ -9,16 +9,15 @@ from Modules.Base.ModLogging import ModLogging, LoggingType as LT
 
 from Modules.Base.ModQtFont import ModQtFont
 
-
-class MyIconTextButton(QPushButton):
-    """图标文本按钮
+class MyRadioButton(QPushButton):
+    """单选框按钮
     
-    一个左侧显示 SVG 图标、右侧显示文本的按钮，支持悬停效果和点击效果，两端为圆角
+    一个左侧显示 SVG 图标、右侧显示文本的单选框按钮，支持悬停效果和点击效果，两端为圆角
     状态有四种：正常、悬停、按下、锁定
     """
 
     def __init__(self, parent=None, svg_path="", text="", height=36, tooltip="",
-                 svg_size=(24, 24),
+                 svg_size=(24, 24), radio_btn_id=None,   
                  border_width=1, border_color=QColor(255, 255, 255, 0),
                  svg_color=QColor(255, 255, 255, 255),
                  text_color=QColor(255, 255, 255, 255),
@@ -27,7 +26,7 @@ class MyIconTextButton(QPushButton):
                  padding=(4, 0, 4, 0),
                  command=None):
         """
-        初始化图标文本按钮
+        初始化单选框按钮
 
         Args:
             parent: 父控件
@@ -116,17 +115,19 @@ class MyIconTextButton(QPushButton):
         # 添加状态跟踪
         self.is_hovered = False
         self.is_pressed = False
-        self.is_locked = False
+        self.is_checked = False
 
         # 绑定函数
         if command:
             self.clicked.connect(command)
+        
+        self.clicked.connect(lambda: self.check())
 
         # 设置背景颜色（默认透明）
         self.bg_color = QColor(255, 255, 255, 0)
         self.hover_color = QColor(255, 255, 255, 44)
         self.press_color = QColor(255, 255, 255, 128)
-        self.lock_color = QColor(255, 255, 255, 255)
+        self.check_color = QColor(255, 255, 255, 255)
         
         # 计算并设置按钮宽度
         self.updateButtonSize()
@@ -191,7 +192,6 @@ class MyIconTextButton(QPushButton):
             svg_content = file.read()
         
         # 替换 currentColor 为具体的颜色值
-        import re
         svg_content = re.sub(r'fill="currentColor"', f'fill="{color.name()}"', svg_content)
         svg_content = re.sub(r'stroke="currentColor"', f'stroke="{color.name()}"', svg_content)
         
@@ -306,9 +306,12 @@ class MyIconTextButton(QPushButton):
             self.update()  # 触发重绘
         super().mouseReleaseEvent(event)
 
-    def lock(self):
-        """锁定按钮，使其保持被按下的状态"""
-        self.is_locked = True
+    def check(self):
+        """选中按钮"""
+        if not self.isChecked():
+            self.is_checked = True
+        else:
+            self.is_checked = False
         self.update()  # 触发重绘
 
 
@@ -321,13 +324,14 @@ class MyIconTextButton(QPushButton):
         painter.setRenderHint(QPainter.Antialiasing)  # 抗锯齿
 
         # 根据状态设置背景颜色
-        if self.is_pressed:
-            # 按下状态
-            bg_color = self.press_color
+        if self.is_checked:
+            # 锁定状态
+            bg_color = self.check_color
             border_color = QColor(self.border_color)
-            border_color.setAlpha(0)  # 按下时边框透明
-            self.setTextColor(self._text_color)
-            self.setSvgColor(self._svg_color)
+            border_color.setAlpha(255)  # 按下时边框不透明
+            transparent_color = self.get_background_color(self.parentWidget())
+            self.setTextColor(transparent_color)
+            self.setSvgColor(transparent_color)
             
         elif self.is_hovered:
             # 悬停状态
@@ -337,14 +341,13 @@ class MyIconTextButton(QPushButton):
             self.setTextColor(self._text_color)
             self.setSvgColor(self._svg_color)
 
-        elif self.is_locked:
-            # 锁定状态
-            bg_color = self.lock_color
+        elif self.is_pressed:
+            # 按下状态
+            bg_color = self.press_color
             border_color = QColor(self.border_color)
-            border_color.setAlpha(255)  # 按下时边框不透明
-            transparent_color = self.get_background_color(self.parentWidget())
-            self.setTextColor(transparent_color)
-            self.setSvgColor(transparent_color)
+            border_color.setAlpha(0)  # 按下时边框透明
+            self.setTextColor(self._text_color)
+            self.setSvgColor(self._svg_color)
         
         else:
             # 正常状态
